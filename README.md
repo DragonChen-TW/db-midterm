@@ -14,6 +14,14 @@ Run this command to remove the environment.
 conda remove --name db-midterm --all
 ```
 
+## How to start locally
+
+```shell
+conda activate db-midterm
+python main.py
+# go to http://localhost:8765/
+```
+
 ## Folder Sructure
 
 Flask 架構第二種：僅使用 Flask Blueprints 切分路徑，但 templates 統一放在主資料夾下的 templates 內。
