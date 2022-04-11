@@ -16,6 +16,32 @@ conda remove --name db-midterm --all
 
 ## How to start locally
 
+### Oracle DB test
+
+I attached a zip file of instantclient binary (for macos) under `client/` folder.
+
+Double click ot unarchieve the `instantclient_19_8` folder.
+
+You can run the test file to test the connection.
+
+```shell
+conda activate db-midterm
+python backend.test_db.py
+```
+
+Output is expected as
+```
+Successfully connected to Oracle Database
+5 Rows Inserted
+Task 1 is NOT done
+Task 2 is NOT done
+Task 3 is done
+Task 4 is NOT done
+Task 5 is done
+```
+
+### Web server
+
 ```shell
 conda activate db-midterm
 python main.py
