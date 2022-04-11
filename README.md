@@ -31,7 +31,7 @@ You can run the test file to test the connection.
 
 ```shell
 conda activate db-midterm
-python backend.test_db.py
+python backend/test_db.py
 ```
 
 Output is expected as
