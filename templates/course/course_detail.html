@@ -3,7 +3,7 @@
 {% block title %}Course{% endblock %}
 
 {% block content %}
-<h1>course list</h1>
+<h1>course</h1>
 <table>
     <tbody>
         <tr>
@@ -14,7 +14,7 @@
             <th>Price</th>
             <th>Language</th>
         </tr>
-        {% for c in courses %}
+        {% for c in course %}
             <tr>
                 <td>{{ c.COURSE_ID }}</td>
                 <td>{{ c.TITLE }}</td>

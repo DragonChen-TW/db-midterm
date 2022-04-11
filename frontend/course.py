@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from backend.courses import get_all_courses
+from backend.courses import get_all_courses, get_one_courses
 
 
 course_app = Blueprint('course_app', __name__)
