@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Course List{% endblock %}
+{% block title %}Course{% endblock %}
 
 {% block content %}
 <h1>course list</h1>
@@ -9,6 +9,8 @@
         <tr>
             <th>ID</th>
             <th>Title</th>
+            <th>Category</th>
+            <th>Brief</th>
             <th>Price</th>
             <th>Language</th>
         </tr>
@@ -16,7 +18,9 @@
             <tr>
                 <td>{{ c.COURSE_ID }}</td>
                 <td>{{ c.TITLE }}</td>
-                <td>NT${{ c.COURSE_FEE }}</td>
+                <td>{{ c.CATEGORY }}</td>
+                <td>{{ c.Brief }}</td>
+                <td>{NT${ c.COURSE_FEE }}</td>
                 <td>{{ c.LANGUAGE }}</td>
             </tr>
         {% endfor %}
