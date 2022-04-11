@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint
-from frontend.courses import course_app
+from frontend.course import course_app
 from frontend.auth import auth_app
 
 app = Flask(__name__)

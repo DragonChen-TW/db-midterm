@@ -44,11 +44,13 @@
 <table>
     <tbody>
         <tr>
+            <th>ID</th>
             <th>Name</th>
         </tr>
-        {% for u in users %}
+        {% for s in students %}
             <tr>
-                <td>{{u}}</td>
+                <td>{{s.S_ID}}</td>
+                <td>{{s.NAME}}</td>
             </tr>
         {% endfor %}
     </tbody>
