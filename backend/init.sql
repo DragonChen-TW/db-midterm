@@ -25,7 +25,7 @@ CREATE TABLE CHAPTER (
     chapter_title    VARCHAR(50),
     course_id        CHAR(10)      NOT NULL,
     PRIMARY KEY(chapter_id),
-    FOREIGN KEY(course_id),
+    FOREIGN KEY(course_id)
     REFERENCES COURSE(course_id)
 );
 

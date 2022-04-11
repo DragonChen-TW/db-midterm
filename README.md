@@ -53,6 +53,15 @@ python main.py
 # go to http://localhost:8765/
 ```
 
+### Some commands
+
+1. db init
+
+```shell
+python run_init.py
+```
+This script can resset the Orcale DB to the original state defined in `backend/init.sql`.
+
 ## Folder Sructure
 
 Flask 架構第二種：僅使用 Flask Blueprints 切分路徑，但 templates 統一放在主資料夾下的 templates 內。
