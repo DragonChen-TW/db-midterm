@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} {{instructor_name}} {% endblock %}
+
+{% block content %}
+<h1>Welcome, {{ instructor_name }}</h1>
+<table>
+    <tbody>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Language</th>
+        </tr>
+        {% for c in courses %}
+            <tr>
+                <td>{{ c.COURSE_ID }}</td>
+                <td>{{ c.TITLE }}</td>
+                <td>{{ c.COURSE_FEE }}</td>
+                <td>{{ c.LANGUAGE }}</td>
+                <td>
+                    <form method="post" action="editCourse">
+                        <input type="submit" value="edit">
+                    </form>
+                </td>
+                <td>
+                    <form method="post" action="deleteCourse">
+                        <input type="submit" value="delete">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
