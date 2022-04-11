@@ -5,6 +5,7 @@ dependencies:
   - ca-certificates=2022.3.29=hecd8cb5_0
   - certifi=2021.10.8=py39hecd8cb5_2
   - click=8.0.4=py39hecd8cb5_0
+  - cx_oracle=8.3.0=py39hca72f7f_0
   - dataclasses=0.8=pyh6d0b6a4_7
   - faker=8.8.1=pyhd3eb1b0_1
   - flask=2.0.3=pyhd3eb1b0_0

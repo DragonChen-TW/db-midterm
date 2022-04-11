@@ -2,10 +2,15 @@
 
 In this project, we use conda/anaconda/miniconda to manage Python packages.
 
-### Create a new envirnoment
+### Create a new environment
 Run this command to rebuild a similar environment from given yaml.
 ```shell
 conda env create -f environment.yml
+```
+
+### Export environment
+```shell
+conda env export > environment.yml
 ```
 
 ### Remove exist environment
