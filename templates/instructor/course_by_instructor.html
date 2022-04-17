@@ -19,13 +19,13 @@
                 <td>{{ c.COURSE_FEE }}</td>
                 <td>{{ c.LANGUAGE }}</td>
                 <td class="table-button">
-                    <form method="post" action="editCourse">
-                        <input type="hidden" value="{{ c.COURSE_ID }}">
+                    <form method="POST" action="/courses/{{ c.COURSE_ID }}">
+                        <!-- <input type="hidden" name="course_id" value="{{ c.COURSE_ID }}"> -->
                         <input type="submit" value="edit">
                     </form>
                 </td>
                 <td class="table-button">
-                    <form method="post" action="deleteCourse">
+                    <form method="POST" action="/courses/{{ c.COURSE_ID }}/delete">
                         <input type="submit" value="delete">
                     </form>
                 </td>

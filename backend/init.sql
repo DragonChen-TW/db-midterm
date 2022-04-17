@@ -26,7 +26,7 @@ CREATE TABLE CHAPTER (
     course_id        NUMBER(10)      NOT NULL,
     PRIMARY KEY(chapter_id),
     FOREIGN KEY(course_id)
-    REFERENCES COURSE(course_id)
+    REFERENCES COURSE(course_id) ON DELETE CASCADE
 );
 
 CREATE TABLE QUIZ (
@@ -36,7 +36,7 @@ CREATE TABLE QUIZ (
     chapter_id NUMBER(10)      NOT NULL,
     PRIMARY KEY(q_id),
     FOREIGN KEY(chapter_id)
-    REFERENCES CHAPTER(chapter_id)
+    REFERENCES CHAPTER(chapter_id) ON DELETE CASCADE
 );
 
 CREATE TABLE CONTENT (
@@ -48,7 +48,7 @@ CREATE TABLE CONTENT (
     chapter_id     NUMBER(10),
     PRIMARY KEY (content_id),
     FOREIGN KEY (chapter_id)
-    REFERENCES CHAPTER(chapter_id)
+    REFERENCES CHAPTER(chapter_id) ON DELETE CASCADE
 );
 
 CREATE TABLE INSTRUCTOR (
@@ -92,7 +92,7 @@ CREATE TABLE COURSEINSTRUCTOR (
     course_id   NUMBER(10)       NOT NULL,
     i_id        NUMBER(10)       NOT NULL,
     PRIMARY KEY(course_id, i_id),
-    FOREIGN KEY(course_id) REFERENCES COURSE(course_id),
+    FOREIGN KEY(course_id) REFERENCES COURSE(course_id) ON DELETE CASCADE,
     FOREIGN KEY(i_id) REFERENCES INSTRUCTOR(i_id)
 );
 
