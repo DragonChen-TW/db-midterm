@@ -1,0 +1,56 @@
+INSERT INTO COURSE VALUES(1, '資料庫系統', '資訊類', '資管系必修課', 20.00, '中文');
+INSERT INTO COURSE VALUES(2, '日文入門', '語言類', '日文是現今相當熱門的語言', 15.00, '日文');
+INSERT INTO COURSE VALUES(3, '英文口說', '語言類', '英文是現今相當熱門的語言', 25.00, '英文');
+INSERT INTO COURSE VALUES(4, '微積分', '工程類', '微積分是工學院必備的課程', 20.00, '英文');
+INSERT INTO COURSE VALUES(5, '巨量分析', '資訊類', '資管系必修課', 25.00, '中文');
+INSERT INTO COURSE VALUES(6, '普通生物學', '生科類', '生科系必修課', 15.00, '中文');
+INSERT INTO COURSE VALUES(7, '國文(一)', '語言類', '中文系必修課', 15.00, '中文');
+
+INSERT INTO CHAPTER VALUES(1, '正規化', 1);
+INSERT INTO CHAPTER VALUES(2, 'ERD', 1);
+INSERT INTO CHAPTER VALUES(3, '機器學習介紹', 5);
+INSERT INTO CHAPTER VALUES(4, '50音介紹', 2);
+INSERT INTO CHAPTER VALUES(5, '因果關係推論', 5);
+
+INSERT INTO QUIZ VALUES(1, '選擇題', '~/tmp/test.txt', 5);
+INSERT INTO QUIZ VALUES(2, '問答題', '~/tmp/quiz2.pdf', 2);
+INSERT INTO QUIZ VALUES(3, '選擇題', '~/tmp/quiz1.pdf', 2);
+
+INSERT INTO CONTENT VALUES(1, '選擇題', '1', '5.5', '~/content/BigData/hw1.docs_choice', 1);
+INSERT INTO CONTENT VALUES(2, '問答題', '1', '4.5', '~/content/DB/hw2.docs', 2);
+INSERT INTO CONTENT VALUES(3, '是非題', '0', '3', '~/content/BigData/hw1_choice.docs', 1);
+INSERT INTO CONTENT VALUES(4, '是非題', '1', '7.5', '~/content/BigData/hw3.docs', 5);
+
+INSERT INTO INSTRUCTOR VALUES(1, 'tiger', 's1233456@gmail.com', 'test123', to_date('2022-03-01', 'YYYY-MM-DD'), '你好我叫老虎');
+INSERT INTO INSTRUCTOR VALUES(2, 'dragon', 's123532@gmail.com', 'Test123', to_date('2021-02-05', 'YYYY-MM-DD'), '你好我是龍');
+INSERT INTO INSTRUCTOR VALUES(3, 'ren', 's2342532@gmail.com', '234twe', to_date('2020-01-25', 'YYYY-MM-DD'), '你好我是人');
+INSERT INTO INSTRUCTOR VALUES(4, 'good', 's2342@gmail.com', 'gr23423', to_date('2019-08-12', 'YYYY-MM-DD'), '大家好');
+
+INSERT INTO STUDENT VALUES(1, 'lailai', 'd12334@gmail.com', '2523gfw', to_date('2015-01-26', 'YYYY-MM-DD'));
+INSERT INTO STUDENT VALUES(2, 'leelee', 'd234532@gmail.com', '234dsfs', to_date('2013-12-01', 'YYYY-MM-DD'));
+INSERT INTO STUDENT VALUES(3, 'renren', 'd23532@gmail.com', 'efw23r', to_date('2016-01-08', 'YYYY-MM-DD'));
+INSERT INTO STUDENT VALUES(4, 'goodgood', 'g23523@gmail.com', 'sdg23', to_date('2021-02-18', 'YYYY-MM-DD'));
+
+INSERT INTO PAYMENT VALUES(1, to_date('2021-01-26', 'YYYY-MM-DD'), 20.0, '2341');
+INSERT INTO PAYMENT VALUES(2, to_date('2022-01-23', 'YYYY-MM-DD'), 25.0, '1245');
+INSERT INTO PAYMENT VALUES(3, to_date('2015-03-12', 'YYYY-MM-DD'), 30.0, '5235');
+INSERT INTO PAYMENT VALUES(4, to_date('2018-08-12', 'YYYY-MM-DD'), 15.0, '2343');
+
+INSERT INTO ENROLL VALUES(1, 1, 1, to_date('2015-12-31', 'YYYY-MM-DD'));
+INSERT INTO ENROLL VALUES(5, 1, 2, to_date('2020-11-21', 'YYYY-MM-DD'));
+INSERT INTO ENROLL VALUES(2, 4, 4, to_date('2019-03-12', 'YYYY-MM-DD'));
+
+INSERT INTO COURSEINSTRUCTOR VALUES(4, 3);
+INSERT INTO COURSEINSTRUCTOR VALUES(3, 2);
+INSERT INTO COURSEINSTRUCTOR VALUES(3, 1);
+INSERT INTO COURSEINSTRUCTOR VALUES(1, 3);
+
+INSERT INTO STUDENTQUIZ VALUES(3, 2);
+INSERT INTO STUDENTQUIZ VALUES(4, 2);
+INSERT INTO STUDENTQUIZ VALUES(4, 1);
+INSERT INTO STUDENTQUIZ VALUES(1, 3);
+
+INSERT INTO STUDENTCONTENT VALUES(3, 2);
+INSERT INTO STUDENTCONTENT VALUES(4, 2);
+INSERT INTO STUDENTCONTENT VALUES(4, 1);
+INSERT INTO STUDENTCONTENT VALUES(1, 3);
