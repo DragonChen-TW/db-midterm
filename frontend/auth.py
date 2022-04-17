@@ -38,10 +38,7 @@ def login():
 
 @auth_app.route('/logout', methods=['GET'])
 def logout():
-    session.pop('email', None)
-    session.pop('name', None)
-    session.pop('user_type', None)  
-
+    session.pop('user', None)
     flash('登出成功', 'success')
     return redirect('/')
 

@@ -12,14 +12,19 @@ connection = cx_Oracle.connect(
 
 cursor = connection.cursor()
 
-with open('backend/init.sql') as f:
-    sqls = f.read().replace('\n', ' ')
-    sqls = sqls.split(';')
-    for sql in sqls:
-        if '-- ' in sql:
-            continue
-        print('sql', sql[:50])
-        try:
-            cursor.execute(sql)
-        except Exception as e:
-            print('-----> error: ', e)
+def run_sql_file(f_name):
+    with open(f_name) as f:
+        sqls = f.read().replace('\n', ' ')
+        sqls = sqls.split(';')
+        for sql in sqls:
+            if '-- ' in sql:
+                continue
+            print('sql', sql[:50])
+            try:
+                cursor.execute(sql)
+            except Exception as e:
+                print('-----> error: ', e)
+        connection.commit()
+
+run_sql_file('backend/init.sql')
+run_sql_file('backend/insert.sql')

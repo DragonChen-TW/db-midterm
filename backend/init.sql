@@ -11,7 +11,7 @@ DROP TABLE STUDENTQUIZ CASCADE CONSTRAINTS;
 DROP TABLE STUDENTCONTENT CASCADE CONSTRAINTS;
 
 CREATE TABLE COURSE (
-    course_id    CHAR(10)      NOT NULL,
+    course_id    NUMBER(10)      NOT NULL,
     title        VARCHAR(50)   NOT NULL,
     category     VARCHAR(30),
     brief        VARCHAR(100),
@@ -21,38 +21,38 @@ CREATE TABLE COURSE (
 );
 
 CREATE TABLE CHAPTER (
-    chapter_id       CHAR(10)       NOT NULL,
+    chapter_id       NUMBER(10)       NOT NULL,
     chapter_title    VARCHAR(50),
-    course_id        CHAR(10)      NOT NULL,
+    course_id        NUMBER(10)      NOT NULL,
     PRIMARY KEY(chapter_id),
     FOREIGN KEY(course_id)
     REFERENCES COURSE(course_id)
 );
 
 CREATE TABLE QUIZ (
-    q_id       CHAR(10)      NOT NULL,
+    q_id       NUMBER(10)      NOT NULL,
     type       VARCHAR(30),
     path       VARCHAR(100),
-    chapter_id CHAR(8)      NOT NULL,
+    chapter_id NUMBER(10)      NOT NULL,
     PRIMARY KEY(q_id),
     FOREIGN KEY(chapter_id)
     REFERENCES CHAPTER(chapter_id)
 );
 
 CREATE TABLE CONTENT (
-    content_id     CHAR(10)      NOT NULL,
+    content_id     NUMBER(10)      NOT NULL,
     type           VARCHAR(30),
     is_mandatory   NUMBER(1),
     required_time  DECIMAL(6, 2),
     file_path      VARCHAR(100),
-    chapter_id     CHAR(8),
+    chapter_id     NUMBER(10),
     PRIMARY KEY (content_id),
     FOREIGN KEY (chapter_id)
     REFERENCES CHAPTER(chapter_id)
 );
 
 CREATE TABLE INSTRUCTOR (
-    i_id                 CHAR(10)        NOT NULL,
+    i_id                 NUMBER(10)        NOT NULL,
     name                 VARCHAR(20),
     email                VARCHAR(40),
     password             VARCHAR(20),
@@ -62,7 +62,7 @@ CREATE TABLE INSTRUCTOR (
 );
 
 CREATE TABLE STUDENT (
-    s_id                CHAR(10)          NOT NULL,
+    s_id                NUMBER(10)          NOT NULL,
     name                 VARCHAR(20),
     email                VARCHAR(40),
     password             VARCHAR(20),
@@ -71,7 +71,7 @@ CREATE TABLE STUDENT (
 );
 
 CREATE TABLE PAYMENT (
-    p_id    CHAR(10)    NOT NULL,
+    p_id    NUMBER(10)    NOT NULL,
     p_date    DATE,
     amount  INT,
     card_id CHAR(4),
@@ -79,9 +79,9 @@ CREATE TABLE PAYMENT (
 );
 
 CREATE TABLE ENROLL (
-    course_id    CHAR(10)       NOT NULL,
-    s_id         CHAR(10)       NOT NULL,
-    p_id         CHAR(10),
+    course_id    NUMBER(10)       NOT NULL,
+    s_id         NUMBER(10)       NOT NULL,
+    p_id         NUMBER(10),
     e_date         DATE,
     PRIMARY KEY(course_id, s_id),
     FOREIGN KEY(s_id) REFERENCES STUDENT(s_id),
@@ -89,24 +89,24 @@ CREATE TABLE ENROLL (
 );
 
 CREATE TABLE COURSEINSTRUCTOR (
-    course_id   CHAR(10)       NOT NULL,
-    i_id        CHAR(10)       NOT NULL,
+    course_id   NUMBER(10)       NOT NULL,
+    i_id        NUMBER(10)       NOT NULL,
     PRIMARY KEY(course_id, i_id),
     FOREIGN KEY(course_id) REFERENCES COURSE(course_id),
     FOREIGN KEY(i_id) REFERENCES INSTRUCTOR(i_id)
 );
 
 CREATE TABLE STUDENTQUIZ (
-    s_id      CHAR(10)        NOT NULL,
-    q_id      CHAR(10)        NOT NULL,
+    s_id      NUMBER(10)        NOT NULL,
+    q_id      NUMBER(10)        NOT NULL,
     PRIMARY KEY(s_id, q_id),
     FOREIGN KEY (s_id) REFERENCES STUDENT(s_id),
     FOREIGN KEY (q_id) REFERENCES QUIZ(q_id)    
 );
 
 CREATE TABLE STUDENTCONTENT (
-    s_id           CHAR(10)       NOT NULL,
-    content_id     CHAR(10)       NOT NULL,
+    s_id           NUMBER(10)       NOT NULL,
+    content_id     NUMBER(10)       NOT NULL,
     PRIMARY KEY(s_id, content_id),
     FOREIGN KEY(s_id) REFERENCES STUDENT(s_id),
     FOREIGN KEY(content_id) REFERENCES CONTENT(content_id)
