@@ -35,18 +35,6 @@
 </head>
 
 <body>
-    {% if failed_notify  %}
-    <div class="alert alert-danger" role="alert">
-        {{ failed_notify }}
-    </div>
-    {% endif %}
-
-    {% if success_notify  %}
-    <div class="alert alert-success" role="alert">
-        {{ success_notify }}
-    </div>
-    {% endif %}
-
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -55,6 +43,19 @@
     </div>
     <!-- Spinner End -->
 
+    <!-- Flash Start -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flashes">
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" style="margin-bottom: 0;" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <!-- Flash End -->
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
@@ -78,11 +79,11 @@
                     </div>
                 </div>
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
-                {% if session['email'] %}
+                {% if session.user %}
                     <div class="nav-item dropdown">
-                        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">HI, {{ session['name'] }}</a>
+                        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">HI, {{ session.user.NAME }}</a>
                         <div class="dropdown-menu fade-down m-0">
-                            <a href="/user/{{session['email']}}" class="dropdown-item">My Profile</a>
+                            <a href="/user/{{session.user.S_ID}}" class="dropdown-item">My Profile</a>
                             <a href="/logout" class="dropdown-item">Logout</a>
                         </div>
                     </div>
@@ -105,7 +106,7 @@
 
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-dark text-light footer pt-3 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">

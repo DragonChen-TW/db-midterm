@@ -14,11 +14,13 @@ def verify_student_password(email, password):
         return None
 
     u = dict(zip(cols, u))
-
     print('u', u)
 
     if password != u['PASSWORD']:
         return False
+    
+    u.pop('PASSWORD', None)
+    u.pop('REGISTER_DATE', None)
 
     return u
 
@@ -30,3 +32,19 @@ def get_all_students():
     users = [dict(zip(cols, r)) for r in res]
 
     return users
+
+def get_student_detail(s_id):
+    cursor = connection.cursor()
+
+    sql = f'''SELECT * FROM STUDENT WHERE S_ID = '{s_id}' '''
+    print('sql', sql)
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    u = dict(zip(cols, res.fetchone()))
+
+    u.pop('PASSWORD', None)
+    u.pop('REGISTER_DATE', None)
+
+    # Add more detailed query about courses and 
+
+    return u
