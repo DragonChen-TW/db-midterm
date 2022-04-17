@@ -35,6 +35,18 @@
 </head>
 
 <body>
+    {% if failed_notify  %}
+    <div class="alert alert-danger" role="alert">
+        {{ failed_notify }}
+    </div>
+    {% endif %}
+
+    {% if success_notify  %}
+    <div class="alert alert-success" role="alert">
+        {{ success_notify }}
+    </div>
+    {% endif %}
+
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -66,8 +78,19 @@
                     </div>
                 </div>
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
+                {% if session['email'] %}
+                    <div class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">HI, {{ session['name'] }}</a>
+                        <div class="dropdown-menu fade-down m-0">
+                            <a href="/user/{{session['email']}}" class="dropdown-item">My Profile</a>
+                            <a href="/logout" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="/login" class="nav-item nav-link">Login</a>
+                {% endif %}
             </div>
-            <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+            <!-- <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a> -->
         </div>
     </nav>
     <!-- Navbar End -->
