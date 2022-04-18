@@ -15,11 +15,11 @@
             <table style="border: 1px solid; margin: auto; width: 50%;">
                 <tr>
                     <td>課程編號</td>
-                    <td>{{ course }}</td>
+                    <td>{{ course.COURSE_ID }}</td>
                 </tr>
                 <tr>
                     <td>課程名稱</td>
-                    <td><input type="text" id="course_title" name="course_title"></td>
+                    <td><input type="text" id="course_title" name="course_title" value="{{ course.TITLE }}"></td>
                 </tr>
                 <tr>
                     <td>課程類別</td>
@@ -34,19 +34,19 @@
                 </tr>
                 <tr>
                     <td>課程敘述</td>
-                    <td><input type="text" id="course_brief" name="course_brief"></td>
+                    <td><input type="text" id="course_brief" name="course_brief" value="{{ course.BRIEF }}"></td>
                 </tr>
                 <tr>
                     <td>課程費用</td>
-                    <td><input type="number" id="course_fee" name="course_fee"></td>
+                    <td><input type="number" id="course_fee" name="course_fee" value="{{ course.COURSE_FEE }}"></td>
                 </tr>
                 <tr>
                     <td>使用語言</td>
-                    <td><input type="text" id="course_lang" name="course_lang"></td>
+                    <td><input type="text" id="course_lang" name="course_lang" value="{{ course.LANGUAGE }}"></td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="submit" value="確定新增">
+                        <input type="submit" value="確認修改">
                     </td>
                 </tr>
             </table>

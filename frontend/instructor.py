@@ -9,6 +9,7 @@ from backend.courses import (
 from backend.instructor import (
     get_instructor_detail,
     insert_to_course, insert_to_course_instructor,
+    edit_to_course,
 )
 
 instru_app = Blueprint('instru_app', __name__)
@@ -91,6 +92,37 @@ def assign_new_course_id():
     # print(new_course_id)
 
     return render_template('instructor/create_new_course.html', course=new_course_id)
+
+@instru_app.route('/instructor/<course_id>/edit', methods=['GET', 'POST'])
+def edit_course(course_id):
+    print('ID', course_id)
+    course_id = int(course_id)
+    instructor_id = get_instructor_id()
+    courses = get_courses_by_instructor(instructor_id)
+    c_ids = [int(c['COURSE_ID']) for c in courses]
+
+    # print('there', courses)
+    if course_id not in c_ids:
+        flash('你沒有權限', 'danger')
+        return redirect('/')
+
+    if request.method == 'POST':
+        print(f'[message]  Edit course.')
+        course_content = {
+            "c_title": request.values.get('course_title'),
+            "c_brief": request.values.get('course_brief'),
+            "c_fee": request.values.get('course_fee'),
+            "c_lang": request.values.get('course_lang'),
+        }
+        edit_to_course(course_id, course_content)
+
+        # after insertion, return to /instructor_home
+        return redirect('/instructor_home/')
+
+    idx = c_ids.index(course_id)
+    course = courses[idx]
+
+    return render_template('instructor/edit_course.html', course=course)
 
 
 # # Instructor edit course

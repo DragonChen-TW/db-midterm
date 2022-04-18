@@ -26,6 +26,17 @@ def insert_to_course(course):
     res = cursor.execute(sql)
     connection.commit()
 
+def edit_to_course(course_id, course):
+    cursor = connection.cursor()
+    
+    sql = f'''
+        UPDATE COURSE
+        SET TITLE = '{course['c_title']}', BRIEF = '{course['c_brief']}', COURSE_FEE = '{course['c_fee']}', LANGUAGE = '{course['c_lang']}'
+        WHERE COURSE_ID = {course_id}
+    '''
+    print('sql: ', sql)
+    res = cursor.execute(sql)
+    # connection.commit()
 
 def insert_to_course_instructor(c_id, instructor_id):
     cursor = connection.cursor()
