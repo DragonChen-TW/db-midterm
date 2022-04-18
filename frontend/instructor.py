@@ -7,13 +7,17 @@ from backend.courses import (
     remove_one_course, get_course_chapter, get_course_contents
     )
 from backend.instructor import (
-    get_instructor_detail,
+    get_all_instructor, get_instructor_detail,
     insert_to_course, insert_to_course_instructor,
     edit_to_course,
 )
 
 instru_app = Blueprint('instru_app', __name__)
 
+@instru_app.route('/instructors')
+def show_all_instructor():
+    instructors = get_all_instructor()
+    return render_template('instructor/instructor_list.html', instructor=instructors)
 def get_instructor_id():
     user = session.get('user')
     if not user:

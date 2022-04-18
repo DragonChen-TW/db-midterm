@@ -23,6 +23,14 @@ def show_all_students():
     print('stu', students)
     return render_template('auth/user_list.html', students=students)
 
+@auth_app.route('/contact')
+def show_contact():
+    return render_template('contact.html')
+
+@auth_app.route('/about')
+def show_about():
+    return render_template('about.html')
+
 @auth_app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':

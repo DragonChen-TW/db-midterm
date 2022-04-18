@@ -1,6 +1,18 @@
 from .connect import connection
 from .utils import *
 
+
+
+def get_all_instructor():
+    cursor = connection.cursor()
+
+    res = cursor.execute('''SELECT NAME, REGISTER_DATE, INTRODUCTION_BRIEF FROM INSTRUCTOR''')
+    
+    cols = parse_column_headers(res)
+    instructor = [dict(zip(cols, r)) for r in res]
+
+    return instructor
+
 def get_instructor_detail(instructor_id):
     cursor = connection.cursor()
     sql = f'''SELECT * FROM instructor WHERE I_ID = '{instructor_id}' '''
