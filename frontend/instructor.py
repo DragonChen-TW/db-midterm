@@ -1,6 +1,8 @@
 from webbrowser import get
 from flask import (
-    Blueprint, render_template, flash, redirect, request, session
+    Blueprint, render_template,
+    flash, redirect, request, session,
+    current_app
 )
 from backend.courses import (
     get_all_courses, get_one_course, get_courses_by_instructor,
@@ -11,6 +13,8 @@ from backend.instructor import (
     insert_to_course, insert_to_course_instructor,
     edit_to_course,
 )
+
+from backend.mail import send_mail
 
 instru_app = Blueprint('instru_app', __name__)
 

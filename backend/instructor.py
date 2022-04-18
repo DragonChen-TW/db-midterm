@@ -6,7 +6,7 @@ from .utils import *
 def get_all_instructor():
     cursor = connection.cursor()
 
-    res = cursor.execute('''SELECT NAME, REGISTER_DATE, INTRODUCTION_BRIEF FROM INSTRUCTOR''')
+    res = cursor.execute('''SELECT * FROM INSTRUCTOR''')
     
     cols = parse_column_headers(res)
     instructor = [dict(zip(cols, r)) for r in res]
@@ -26,6 +26,22 @@ def get_instructor_detail(instructor_id):
     # Add more detailed query about courses and 
 
     return u
+
+def insert_instructor(name, email, password):
+    cursor = connection.cursor()
+
+    instructors = get_all_instructor()
+    max_id = max([int(i['I_ID']) for i in instructors])
+    new_id = max_id + 1
+
+    sql = f'''
+        INSERT INTO instructor (I_ID, NAME, EMAIL, PASSWORD)
+        VALUES ({new_id}, '{name}', '{email}', '{password}')
+    '''
+
+    print('sql: ', sql)
+    res = cursor.execute(sql)
+    connection.commit()
 
 def insert_to_course(course):
     cursor = connection.cursor()

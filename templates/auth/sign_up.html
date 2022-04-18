@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <h1 class="pt-5 col-7">Sign Up</h1>
+</div>
+
+<form method="POST">
+    <div class="row g-3 justify-content-center">
+        
+        <div class="row g-3 justify-content-center">
+            <div class="col-3">
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input"
+                        name="user_type" value="Student"
+                        id="usre_type1" checked>
+                    <label class="form-check-label" for="usre_type1">Student</label>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input"
+                        name="user_type" value="Instructor"
+                        id="usre_type2">
+                    <label class="form-check-label" for="usre_type2">Instructor</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="form-floating">
+                <input type="text" class="form-control" name="name"
+                    id="name" placeholder="Name" required>
+                <label for="name">Name</label>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="form-floating">
+                <input type="text" class="form-control" name="email"
+                    id="email" placeholder="Email" required>
+                <label for="name">Email</label>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="form-floating">
+                <input type="password" class="form-control" name="password"
+                    id="password" placeholder="Password" required>
+                <label for="password">Password</label>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="form-floating">
+                <input type="password" class="form-control" name="repeat_password"
+                    id="repeat_password" placeholder="Repeat Password" required>
+                <label for="password">Repeat Password</label>
+            </div>
+        </div>
+        <div class="col-7">
+            <button class="btn btn-primary w-100 py-3" type="submit">Login</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
