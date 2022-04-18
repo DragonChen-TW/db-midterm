@@ -13,9 +13,7 @@
     <!-- div for the table -->
     <div class="container-inside">
         <!-- button to create new course -->
-        <form method="POST" action="/instructor/create">
-            <input type="submit" value="新增課程">
-        </form>
+        <button><a href="/instructor/create">新增課程</a></button>
         
 
         <table style="border: 1px solid; margin: auto; width: 100%; margin-top: 20px;">
@@ -32,21 +30,27 @@
                         <td>{{ c.TITLE }}</td>
                         <td>{{ c.COURSE_FEE }}</td>
                         <td>{{ c.LANGUAGE }}</td>
-                        <td class="table-button">
-                            <form method="POST" action="/instructor/{{ c.COURSE_ID }}/view">
-                                <input type="submit" value="view">
-                            </form>
+                        <td>
+                            <button>
+                                <a href="/instructor/{{ c.COURSE_ID }}/view">
+                                    view
+                                </a>
+                            </button>
                         </td>
-                        <td class="table-button">
-                            <form method="POST" action="/instructor/{{ c.COURSE_ID }}/edit">
-                                <!-- <input type="hidden" name="course_id" value="{{ c.COURSE_ID }}"> -->
-                                <input type="submit" value="edit">
-                            </form>
+                        <td>
+                            <button>
+                                <a href="/instructor/{{ c.COURSE_ID }}/edit">
+                                    <!-- <input type="hidden" name="course_id" value="{{ c.COURSE_ID }}"> -->
+                                    Edit
+                                </a>
+                            </button>
                         </td>
-                        <td class="table-button">
-                            <form method="POST" action="/instructor/{{ c.COURSE_ID }}/delete">
-                                <input type="submit" value="delete">
-                            </form>
+                        <td>
+                            <button>
+                                <a href="/instructor/{{ c.COURSE_ID }}/delete">
+                                    Delete
+                                </a>
+                            </button>
                         </td>
                     </tr>
                 {% endfor %}

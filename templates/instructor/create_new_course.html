@@ -11,7 +11,7 @@
 
     <!-- div for the table -->
     <div class="container-inside">
-        <form method="POST" action="/instructor/submit_new_course">
+        <form method="POST">
             <table style="border: 1px solid; margin: auto; width: 50%;">
                 <tr>
                     <td>課程編號</td>
@@ -23,7 +23,14 @@
                 </tr>
                 <tr>
                     <td>課程類別</td>
-                    <td><input type="text" id="course_cate" name="course_cate"></td>
+                    <td>
+                        <select id="course_cate" name="course_cate">
+                            <option value="資訊類">資訊類</option>
+                            <option value="語言類">語言類</option>
+                            <option value="工程類">工程類</option>
+                            <option value="生科類">生科類</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td>課程敘述</td>

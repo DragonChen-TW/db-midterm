@@ -87,7 +87,7 @@
                     <div class="mb-3">
                         <span id="stars-{{c.COURSE_ID}}">
                         <script>genStars("stars-{{c.COURSE_ID}}", '{{c.AVG_STAR}}');</script>
-                        <small>{{c.AVG_STAR}}</small>
+                        <small>{{ "%.2f"|format(c.AVG_STAR) }}</small>
                         <small>({{c.POPULATION}})</small>
                     </div>
                     <h5 class="mb-4">{{c.TITLE}}</h5>
