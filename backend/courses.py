@@ -46,3 +46,29 @@ def get_courses_by_instructor(instructor_id):
     print(courses)
 
     return courses
+
+def get_course_chapter(c_id):
+    cursor = connection.cursor()
+
+    sql = f'''SELECT * FROM CHAPTER WHERE COURSE_ID = {c_id}'''
+    # print('sql: ', sql)
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    chapters = [dict(zip(cols, r)) for r in res]
+
+    return chapters
+
+def get_course_contents(c_id):
+    cursor = connection.cursor()
+
+    sql = f'''SELECT * FROM (CONTENT NATURAL JOIN CHAPTER) LEFT OUTER JOIN STUDENTCONTENT ON CONTENT.CONTENT_ID = STUDENTCONTENT.CONTENT_ID WHERE COURSE_ID = {c_id}'''
+
+    # sql = f'''SELECT CHAPTER_ID, CHAPTER_TITLE, FILE_PATH, REQUIRED_TIME, COUNT(S_ID) "S_AMOUNT", COUNT(S_ID WHEN STATUS='finish' THEN 1 END) "S_FINISH" FROM (CONTENT NATURAL JOIN CHAPTER) NATURAL JOIN STUDENTCONTENT WHERE COURSE_ID = {c_id} GROUP BY CONTENT_ID'''
+    print('sql: ', sql)
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    contents = [dict(zip(cols, r)) for r in res]
+
+    contents = sorted(contents, key=lambda d: d['CHAPTER_ID']) 
+
+    return contents

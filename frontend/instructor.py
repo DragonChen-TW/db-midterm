@@ -1,7 +1,8 @@
+from webbrowser import get
 from flask import Blueprint, render_template, flash, redirect, request
 from backend.courses import (
     get_all_courses, get_one_course, get_courses_by_instructor,
-    remove_one_course,
+    remove_one_course, get_course_chapter, get_course_contents
     )
 from backend.instructor import (
     get_instructor_detail,
@@ -90,3 +91,22 @@ def insert_new_course():
 #     print(course_id)
 #     # courses_by_instructor = get_courses_by_instructor(instructor_id)
 #     return render_template('course/edit_course.html', course=course_id)
+
+@instru_app.route('/instructor/<course_id>/view', methods=['POST'])
+def view_course_stats(course_id):
+    print(f'course_id: {course_id}')
+    c_id = int(course_id)
+
+    # show course details
+    course_desc = get_one_course(c_id)
+    print(course_desc)
+    
+    # list all chaptet/contents
+    contents = get_course_contents(c_id)
+
+    for content in contents:
+        print(content)
+        
+    # contents = []
+    
+    return render_template('/instructor/view_course_stats.html', course_desc=course_desc, contents=contents)
