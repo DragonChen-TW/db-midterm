@@ -6,10 +6,15 @@ from backend.courses import (
     )
 from backend.instructor import (
     get_instructor_detail,
-    insert_to_course, insert_to_course_instructor,
+    insert_to_course, insert_to_course_instructor, get_all_instructor
 )
 
 instru_app = Blueprint('instru_app', __name__)
+
+@instru_app.route('/instructors')
+def show_all_instructor():
+    instructors = get_all_instructor()
+    return render_template('instructor/instructor_list.html', instructor=instructors)
 
 @instru_app.route('/instructor/<instructor_id>')
 def show_instructor_profile(instructor_id):
