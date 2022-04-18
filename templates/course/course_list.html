@@ -2,6 +2,68 @@
 
 {% block title %}Course List{% endblock %}
 
+{% block header %}
+<style>
+    .star-container {
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        /* object-fit: cover; */
+        display: inline-flex;
+    }
+    .star-img {
+        flex: 1;
+        position: relative;
+        height: 20px;
+        object-fit: cover;
+    }
+</style>
+<script>
+    const ratio = 20;
+    const createStar = (w) => {
+        const starContainer = document.createElement('div');
+        starContainer.className = 'star-container';
+        if (w != 0) {
+            const fullStar = document.createElement('img')
+            fullStar.className = 'star-img';
+            fullStar.src = '/static/img/star.svg';
+            fullStar.style.width = `${w}px`;
+            fullStar.style.objectPosition = `-${ratio}px 0`;
+            starContainer.appendChild(fullStar);
+        }
+        const emptyStar = document.createElement('img')
+        emptyStar.className = 'star-img';
+        emptyStar.src = '/static/img/star.svg';
+        emptyStar.style.width = `-${w}px`;
+        emptyStar.style.objectPosition = `-${w}px 0`;
+        starContainer.appendChild(emptyStar);
+        return starContainer;
+    };
+    const genStars = (id, score) => {
+        score = parseFloat(score);
+        console.log(id, score);
+        const container = document.getElementById(id);
+
+        let stars = document.createElement('div');
+        stars.className = 'stars';
+        // stars.innerHTML = score;
+        for (let i = 0; i < 5; i++) {
+            let star;
+            if (score >= 1) {
+                star = createStar(ratio);
+            } else if (score >= 0 && score < 1) {
+                star = createStar(score * ratio);
+            } else {
+                star = createStar(0);
+            }
+            score -= 1;
+            stars.appendChild(star);
+        }
+        container.appendChild(stars);
+    };
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="text-center wow fadeInUp" data-wow-delay="0.1s" style="margin-top: 40px;">
     <h4 class="section-title bg-white text-center text-primary px-3">Course List</h4>
@@ -23,12 +85,10 @@
                 <div class="text-center p-4 pb-0">
                     <h3 class="mb-0">$NT {{ c.COURSE_FEE }}</h3>
                     <div class="mb-3">
-                        <small class="fa fa-star text-primary"></small>
-                        <small class="fa fa-star text-primary"></small>
-                        <small class="fa fa-star text-primary"></small>
-                        <small class="fa fa-star text-primary"></small>
-                        <small class="fa fa-star text-primary"></small>
-                        <small>(123)</small>
+                        <span id="stars-{{c.COURSE_ID}}">
+                        <script>genStars("stars-{{c.COURSE_ID}}", '{{c.AVG_STAR}}');</script>
+                        <small>{{c.AVG_STAR}}</small>
+                        <small>({{c.POPULATION}})</small>
                     </div>
                     <h5 class="mb-4">{{c.TITLE}}</h5>
                 </div>

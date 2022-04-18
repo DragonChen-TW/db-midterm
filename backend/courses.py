@@ -4,7 +4,15 @@ from .utils import *
 def get_all_courses():
     cursor = connection.cursor()
 
-    res = cursor.execute('''SELECT * FROM COURSE''')
+    res = cursor.execute('''
+    SELECT * FROM COURSE c JOIN (
+        SELECT COURSE_ID, AVG(star) AS avg_star, COUNT(star) AS population
+        FROM FEEDBACK f
+        GROUP BY COURSE_ID
+    ) cf
+    ON c.COURSE_ID = cf.COURSE_ID
+    ''')
+    
     cols = parse_column_headers(res)
     courses = [dict(zip(cols, r)) for r in res]
 

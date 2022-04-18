@@ -278,8 +278,8 @@
     transition: .5s;
 }
 
-.category a:hover img,
-.course-item:hover img {
+.category a:hover .img-fluid,
+.course-item:hover .img-fluid {
     transform: scale(1.1);
 }
 
