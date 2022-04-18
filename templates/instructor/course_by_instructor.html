@@ -32,6 +32,11 @@
                         <td>{{ c.COURSE_FEE }}</td>
                         <td>{{ c.LANGUAGE }}</td>
                         <td class="table-button">
+                            <form method="POST" action="/instructor/{{ c.COURSE_ID }}/view">
+                                <input type="submit" value="view">
+                            </form>
+                        </td>
+                        <td class="table-button">
                             <form method="POST" action="/instructor/{{ c.COURSE_ID }}/edit">
                                 <!-- <input type="hidden" name="course_id" value="{{ c.COURSE_ID }}"> -->
                                 <input type="submit" value="edit">
