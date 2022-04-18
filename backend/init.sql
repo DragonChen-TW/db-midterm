@@ -123,7 +123,7 @@ CREATE TABLE FEEDBACK (
     s_id         NUMBER(10)      NOT NULL,
     course_id    NUMBER(10)      NOT NULL,
     star         NUMBER(3)       NOT NULL,
-    review      VARCHAR(50),
+    review      VARCHAR(150),
     PRIMARY KEY(course_id, s_id),
     FOREIGN KEY(s_id) REFERENCES STUDENT(s_id)  ON DELETE CASCADE,
     FOREIGN KEY(course_id) REFERENCES COURSE(course_id)  ON DELETE CASCADE
