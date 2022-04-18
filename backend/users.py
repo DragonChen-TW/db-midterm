@@ -1,6 +1,22 @@
 from .connect import connection
 from .utils import *
 
+def insert_user(name, email, password):
+    cursor = connection.cursor()
+
+    users = get_all_students()
+    max_id = max([int(u['S_ID']) for u in users])
+    new_id = max_id + 1
+
+    sql = f'''
+        INSERT INTO student (S_ID, NAME, EMAIL, PASSWORD)
+        VALUES ({new_id}, '{name}', '{email}', '{password}')
+    '''
+
+    print('sql: ', sql)
+    res = cursor.execute(sql)
+    connection.commit()
+
 def login_verify(email, password):
     cursor = connection.cursor()
 
