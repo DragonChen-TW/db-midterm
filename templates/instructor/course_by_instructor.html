@@ -3,34 +3,50 @@
 {% block title %} {{instructor_id}} {% endblock %}
 
 {% block content %}
-<h1>Welcome, {{ instructor_id}}</h1>
-<table style="border: 1px solid; margin: auto; width: 70%;">
-    <tbody>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Language</th>
-        </tr>
-        {% for c in courses %}
-            <tr>
-                <td>{{ c.COURSE_ID }}</td>
-                <td>{{ c.TITLE }}</td>
-                <td>{{ c.COURSE_FEE }}</td>
-                <td>{{ c.LANGUAGE }}</td>
-                <td class="table-button">
-                    <form method="POST" action="/courses/{{ c.COURSE_ID }}">
-                        <!-- <input type="hidden" name="course_id" value="{{ c.COURSE_ID }}"> -->
-                        <input type="submit" value="edit">
-                    </form>
-                </td>
-                <td class="table-button">
-                    <form method="POST" action="/courses/{{ c.COURSE_ID }}/delete">
-                        <input type="submit" value="delete">
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+
+<!-- div for main contents -->
+<div class="container-outside">
+
+    <!-- Show instructor name in the h1 -->
+    <h1>Welcome, {{ instructor_id }}</h1> 
+
+    <!-- button to create new course -->
+    <form method="POST" action="/instructor/create">
+        <input type="submit" value="新增課程">
+    </form>
+
+    <!-- div for the table -->
+    <div class="container-inside">
+        <table style="border: 1px solid; margin: auto; width: 70%;">
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Language</th>
+                </tr>
+                {% for c in courses %}
+                    <tr>
+                        <td>{{ c.COURSE_ID }}</td>
+                        <td>{{ c.TITLE }}</td>
+                        <td>{{ c.COURSE_FEE }}</td>
+                        <td>{{ c.LANGUAGE }}</td>
+                        <td class="table-button">
+                            <form method="POST" action="/instructor/{{ c.COURSE_ID }}/edit">
+                                <!-- <input type="hidden" name="course_id" value="{{ c.COURSE_ID }}"> -->
+                                <input type="submit" value="edit">
+                            </form>
+                        </td>
+                        <td class="table-button">
+                            <form method="POST" action="/instructor/{{ c.COURSE_ID }}/delete">
+                                <input type="submit" value="delete">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+</div>
 {% endblock %}
