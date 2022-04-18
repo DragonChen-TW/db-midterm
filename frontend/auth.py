@@ -60,20 +60,27 @@ def show_student_profile(user_id):
 
     return render_template('auth/student_profile.html', user=u)
 
-@auth_app.route('/user/<user_id>/mycourse')
-def show_student_course(user_id):
-    print('u_id', user_id)
+@auth_app.route('/user/mycourse')
+def show_student_course():
+    user = session.get('user')
+    if not user:
+        flash('請先登入', 'danger')
+        return redirect('/login')
+    if not user.get('I_ID', None):
+        flash('你沒有權限', 'danger')
+        return redirect('/')
+
+    user_id = user.get('S_ID', None)
     u = get_student_enroll_course(user_id)
-
-    print('course', u)
-
     return render_template('auth/student_course.html', user=u)
 
-@auth_app.route('/user/<user_id>/mypayment')
-def show_student_payment(user_id):
-    print('u_id', user_id)
+@auth_app.route('/user/mypayment')
+def show_student_payment():
+    user = session.get('user')
+    if not user:
+        flash('請先登入', 'danger')
+        return redirect('/login')
+
+    user_id = user.get('S_ID', None)
     u = get_student_enroll_payment(user_id)
-
-    print('payment', u)
-
     return render_template('auth/student_payment.html', user=u)
