@@ -13,6 +13,7 @@ def get_all_courses():
         GROUP BY c.COURSE_ID
     ) f
     ON c.COURSE_ID = f.COURSE_ID
+    ORDER BY c.COURSE_ID
     ''')
     
     cols = parse_column_headers(res)
@@ -45,9 +46,12 @@ def get_courses_by_instructor(instructor_id):
     cursor = connection.cursor()
     print(instructor_id)
     
-    res = cursor.execute(f'''SELECT * FROM COURSE C, COURSEINSTRUCTOR CI 
-                                WHERE I_ID = '{instructor_id}' 
-                                AND C.COURSE_ID = CI.COURSE_ID''')
+    res = cursor.execute(f'''
+        SELECT * FROM COURSE C, COURSEINSTRUCTOR CI 
+        WHERE I_ID = '{instructor_id}' 
+        AND C.COURSE_ID = CI.COURSE_ID
+        ORDER BY C.COURSE_ID
+    ''')
     cols = parse_column_headers(res)
     courses = [dict(zip(cols, r)) for r in res]
     print(courses)
