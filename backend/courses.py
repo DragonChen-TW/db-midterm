@@ -5,7 +5,8 @@ def get_all_courses():
     cursor = connection.cursor()
 
     res = cursor.execute('''
-    SELECT * FROM COURSE c JOIN (
+    SELECT c.COURSE_ID, TITLE, CATEGORY, BRIEF, COURSE_FEE, "LANGUAGE", AVG_STAR, POPULATION
+    FROM COURSE c LEFT OUTER JOIN (
         SELECT COURSE_ID, AVG(star) AS avg_star, COUNT(star) AS population
         FROM FEEDBACK f
         GROUP BY COURSE_ID
@@ -15,6 +16,8 @@ def get_all_courses():
     
     cols = parse_column_headers(res)
     courses = [dict(zip(cols, r)) for r in res]
+
+    print('courses', courses)
 
     return courses
 

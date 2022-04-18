@@ -18,7 +18,10 @@ def get_instructor_detail(instructor_id):
 def insert_to_course(course):
     cursor = connection.cursor()
     
-    sql = f'''INSERT INTO COURSE (COURSE_ID, TITLE, CATEGORY, BRIEF, COURSE_FEE, LANGUAGE) VALUES ({course['c_id']}, '{course['c_title']}', '{course['c_cate']}', '{course['c_brief']}', {course['c_fee']}, '{course['c_lang']}')'''
+    sql = f'''
+        INSERT INTO COURSE (COURSE_ID, TITLE, CATEGORY, BRIEF, COURSE_FEE, LANGUAGE)
+        VALUES ({course['c_id']}, '{course['c_title']}', '{course['c_cate']}', '{course['c_brief']}', {course['c_fee']}, '{course['c_lang']}')
+    '''
     print('sql: ', sql)
     res = cursor.execute(sql)
     connection.commit()
