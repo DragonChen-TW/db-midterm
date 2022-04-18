@@ -84,11 +84,11 @@
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">HI, {{ session.user.NAME }}</a>
                         <div class="dropdown-menu fade-down m-0">
                             {% if session.user.S_ID %}
-                            <a href="/user/{{session.user.S_ID}}" class="dropdown-item">My Profile</a>
-                            <a href="/user/{{session.user.S_ID}}/mycourse" class="dropdown-item">My Course</a>
-                            <a href="/user/{{session.user.S_ID}}/mypayment" class="dropdown-item">My Payment</a>
+                                <a href="/user/{{session.user.S_ID}}" class="dropdown-item">My Profile</a>
+                                <a href="/user/mycourse" class="dropdown-item">My Course</a>
+                                <a href="/user/mypayment" class="dropdown-item">My Payment</a>
                             {% else %}
-                            <a href="/instructor/{{session.user.I_ID}}" class="dropdown-item">My Profile</a>
+                                <a href="/instructor/{{session.user.I_ID}}" class="dropdown-item">My Profile</a>
                             {% endif %}
                             <a href="/logout" class="dropdown-item">Logout</a>
                         </div>

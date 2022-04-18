@@ -2,13 +2,13 @@
 - [X] Login
 - [X] Logout
 - [X] User Profile
-- [ ] Instructor Profile
+- [X] Instructor Profile
 
 ## Menu
 - [X] Course List
   - [X] Course detail
-- [ ] My Course
-- [ ] My Payment
+- [X] My Course
+- [X] My Payment
 
 ## Create Course
 - [X] Course List/Delete
