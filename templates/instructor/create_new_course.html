@@ -11,8 +11,8 @@
 
     <!-- div for the table -->
     <div class="container-inside">
-        <form action="courses/submit_new_course">
-            <table>
+        <form method="POST" action="/instructor/submit_new_course">
+            <table style="border: 1px solid; margin: auto; width: 50%;">
                 <tr>
                     <td>課程編號</td>
                     <td><input id="course_id" name="course_id" value="{{ course }}" readonly></td>
@@ -37,8 +37,13 @@
                     <td>使用語言</td>
                     <td><input type="text" id="course_lang" name="course_lang"></td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="確定新增">
+                    </td>
+                </tr>
             </table>
-            <input type="submit" value="確定新增">
+            
         </form>
     </div>
     

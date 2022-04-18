@@ -285,7 +285,7 @@
 
 /*** container ***/
 .container-outside div{
-    padding-top: 20px; padding-bottom: 20px; 
+    margin-top: 50px; margin-bottom: 20px; 
     width: 80%;
     margin: auto;
 }

@@ -1,5 +1,6 @@
-from flask import (Blueprint, render_template, flash, redirect)
+from flask import (Blueprint, render_template, flash, redirect, request)
 from backend.courses import get_courses_by_instructor, get_all_courses, remove_one_course
+from backend.instructor import *
 
 
 instru_app = Blueprint('instru_app', __name__)
@@ -51,12 +52,26 @@ def assign_new_course_id():
     instructor_id = 1
     # instructor_id = session.user.get('i_id', None)
 
-    return render_template('instructor/create_new_course.html', course = new_course_id)
+    return render_template('instructor/create_new_course.html', course=new_course_id)
 
-@instru_app.route('/courses/submit_new_course', methods=['POST'])
+@instru_app.route('/instructor/submit_new_course', methods=['POST'])
 def insert_new_course():
-    print(f'insert new course')
-    
+    instructor_id = 1
+
+    print(f'[message]  Insert new course.')
+    course_content = {
+        "c_id": request.values.get('course_id'),
+        "c_title": request.values.get('course_title'),
+        "c_cate": request.values.get('course_cate'),
+        "c_brief": request.values.get('course_brief'),
+        "c_fee": request.values.get('course_fee'),
+        "c_lang": request.values.get('course_lang'),
+    }
+    insert_to_course(course_content)
+    insert_to_course_instructor(request.values.get('course_id'), instructor_id)
+
+    # after insertion, return to /instructor_home
+    return redirect('/instructor_home/')
 
 
 # # Instructor edit course
