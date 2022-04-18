@@ -1,31 +1,33 @@
 ## Auth
-- Login
-- Logout
-- User Profile
-- Instructor Profile
+- [X] Login
+- [X] Logout
+- [X] User Profile
+- [ ] Instructor Profile
 
 ## Menu
-- Course List
-  - Course detail
-- My Course
-- My Payment
-
-## Payment
-- Show students
-- Show statistics
-- Advanced query
+- [X] Course List
+  - [X] Course detail
+- [ ] My Course
+- [ ] My Payment
 
 ## Create Course
-- Course List/Delete
-- Chapter List/Delete
-- Content List/Delete
-- New/Update Course
-- New/Update Chapter
-- New/Update Content
+- [X] Course List/Delete
+- [ ] Chapter List/Delete
+- [ ] Content List/Delete
+<!-- - [ ] Quiz List/Delete -->
+- [ ] New/Update Course
+- [ ] New/Update Chapter
+- [ ] New/Update Content
+<!-- - [ ] New/Update Quiz -->
 
-- Learning Record
+- [ ] Learning Record
 
 ## Classroom
-- Chapter/Content List
-- View Content
-- Quiz
+- [ ] Chapter/Content List
+- [ ] View Content
+<!-- - [ ] Quiz -->
+
+## Advanced
+- [ ] Show students
+- [ ] Show statistics
+- [ ] Advanced query

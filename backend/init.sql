@@ -72,7 +72,7 @@ CREATE TABLE STUDENT (
 
 CREATE TABLE PAYMENT (
     p_id    NUMBER(10)    NOT NULL,
-    p_date    DATE,
+    p_date    TIMESTAMP,
     amount  INT,
     card_id CHAR(4),
     PRIMARY KEY(p_id)
@@ -82,7 +82,7 @@ CREATE TABLE ENROLL (
     course_id    NUMBER(10)       NOT NULL,
     s_id         NUMBER(10)       NOT NULL,
     p_id         NUMBER(10),
-    e_date         DATE,
+    e_date         TIMESTAMP,
     PRIMARY KEY(course_id, s_id),
     FOREIGN KEY(s_id) REFERENCES STUDENT(s_id),
     FOREIGN KEY(p_id) REFERENCES PAYMENT(p_id)
@@ -99,6 +99,9 @@ CREATE TABLE COURSEINSTRUCTOR (
 CREATE TABLE STUDENTQUIZ (
     s_id      NUMBER(10)        NOT NULL,
     q_id      NUMBER(10)        NOT NULL,
+    start_time      TIMESTAMP,
+    complete_time   TIMESTAMP,  
+    score        FLOAT(10),
     PRIMARY KEY(s_id, q_id),
     FOREIGN KEY (s_id) REFERENCES STUDENT(s_id),
     FOREIGN KEY (q_id) REFERENCES QUIZ(q_id)    
@@ -107,6 +110,9 @@ CREATE TABLE STUDENTQUIZ (
 CREATE TABLE STUDENTCONTENT (
     s_id           NUMBER(10)       NOT NULL,
     content_id     NUMBER(10)       NOT NULL,
+    begin          TIMESTAMP,
+    complete       TIMESTAMP,
+    status         VARCHAR(30),
     PRIMARY KEY(s_id, content_id),
     FOREIGN KEY(s_id) REFERENCES STUDENT(s_id),
     FOREIGN KEY(content_id) REFERENCES CONTENT(content_id)
