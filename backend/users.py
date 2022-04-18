@@ -52,7 +52,20 @@ def get_all_snaps():
     cols = parse_column_headers(res)
     num_category = [dict(zip(cols, r)) for r in res]
 
-    return num_student, num_insturctor, num_course, num_category
+    res = cursor.execute('''SELECT *
+    FROM COURSE c LEFT OUTER JOIN (
+        SELECT c.COURSE_ID, AVG(star) AS avg_star, COUNT(star) AS population
+        FROM COURSE c LEFT OUTER JOIN FEEDBACK f
+        ON c.COURSE_ID = f.COURSE_ID
+        GROUP BY c.COURSE_ID
+    ) f
+    ON c.COURSE_ID = f.COURSE_ID
+    WHERE population > 1 AND  ROWNUM <=  3
+    ORDER BY AVG_STAR DESC''')
+    cols = parse_column_headers(res)
+    num_popular = [dict(zip(cols, r)) for r in res]
+
+    return num_student, num_insturctor, num_course, num_category, num_popular
 
 def get_student_detail(s_id):
     cursor = connection.cursor()
