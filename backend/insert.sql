@@ -65,7 +65,7 @@ INSERT INTO STUDENT VALUES(1, 'lailai', 'd12334@gmail.com', '2523gfw', to_date('
 INSERT INTO STUDENT VALUES(2, 'leelee', 'd234532@gmail.com', '234dsfs', to_date('2013-12-01', 'YYYY-MM-DD'));
 INSERT INTO STUDENT VALUES(3, 'renren', 'd23532@gmail.com', 'efw23r', to_date('2013-01-08', 'YYYY-MM-DD'));
 INSERT INTO STUDENT VALUES(4, 'goodgood', 'g23523@gmail.com', 'sdg23', to_date('2021-02-18', 'YYYY-MM-DD'));
-INSERT INTO STUDENT VALUES(5, 'gsdfg', 'g23523@gmail.com', 'werhwsdg23', to_date('2015-03-18', 'YYYY-MM-DD'));
+INSERT INTO STUDENT VALUES(5, 'gsdfg', 'g23523g23@gmail.com', 'werhwsdg23', to_date('2015-03-18', 'YYYY-MM-DD'));
 INSERT INTO STUDENT VALUES(6, 'sdfg', 'g23rderw523@gmail.com', 'grhjsdg23', to_date('2022-01-01', 'YYYY-MM-DD'));
 INSERT INTO STUDENT VALUES(7, 'qererqg', 'g23ewgrrgb523@gmail.com', 'qetrgsdg23', to_date('2015-01-13', 'YYYY-MM-DD'));
 INSERT INTO STUDENT VALUES(8, 'jrjety', 'g235ngfne23@gmail.com', 'seqggdg23', to_date('2011-02-12', 'YYYY-MM-DD'));

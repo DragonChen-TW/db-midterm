@@ -1,20 +1,29 @@
 from .connect import connection
 from .utils import *
 
-def verify_student_password(email, password):
+def login_verify(email, password):
     cursor = connection.cursor()
 
     sql = f'''SELECT * FROM student WHERE email = '{email}' '''
-    print('sql', sql)
     res = cursor.execute(sql)
-    cols = parse_column_headers(res)
+    stu = res.fetchone()
+    s_cols = parse_column_headers(res)
 
-    u = res.fetchone()
-    if not u:
+    sql = f'''SELECT * FROM instructor WHERE email = '{email}' '''
+    res = cursor.execute(sql)
+    ins = res.fetchone()
+    i_cols = parse_column_headers(res)
+    
+    if not stu and not ins:
         return None
 
-    u = dict(zip(cols, u))
-    print('u', u)
+    stu = stu and dict(zip(s_cols, stu))
+    ins = ins and dict(zip(i_cols, ins))
+
+    print('stu', stu, 'ins', ins)
+    
+    # get the first entity out from one of two tables
+    u = stu or ins
 
     if password != u['PASSWORD']:
         return False

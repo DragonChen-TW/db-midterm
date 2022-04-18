@@ -283,6 +283,18 @@
     transform: scale(1.1);
 }
 
+/*** container ***/
+.container-outside div{
+    margin-top: 50px; margin-bottom: 20px; 
+    width: 80%;
+    margin: auto;
+}
+
+.container-inside div{
+    padding-top: 20px; padding-bottom: 20px; 
+    margin: auto;
+}
+
 /*** Table ***/
 .table-button table, th, td{
     border: 1px solid;
