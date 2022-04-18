@@ -3,24 +3,22 @@
 {% block title %}Course List{% endblock %}
 
 {% block content %}
-    <h1>course list</h1>
-    <div class="row g-4 justify-content-center">
+<div class="text-center wow fadeInUp" data-wow-delay="0.1s" style="margin-top: 40px;">
+    <h4 class="section-title bg-white text-center text-primary px-3">Course List</h4>
+    <!-- <h1 class="mb-5">Record</h1> -->
+</div>
+    <div class="row g-4 justify-content-center" style="margin-top: 40px;">
     {% for c in courses %}
         
-        <!-- <td>{{ c.COURSE_ID }}</td> -->
-        <!-- <h5 class="mb-4">{{c.TITLE}}</h5> -->
-        <!-- <td>{{ c.TITLE }}</td> -->
-        <!-- <td>{{ c.COURSE_FEE }}</td> -->
-        <!-- <td>{{ c.LANGUAGE }}</td> -->
         
         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="course-item bg-light">
                 <div class="position-relative overflow-hidden">
-                    <img class="img-fluid" src="img/course-1.jpg" alt="">
-                    <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                    <img class="img-fluid" src="static/img/course-1.jpg" alt="">
+                    <!-- <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                         <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                         <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Join Now</a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="text-center p-4 pb-0">
                     <h3 class="mb-0">$NT {{ c.COURSE_FEE }}</h3>
@@ -35,8 +33,8 @@
                     <h5 class="mb-4">{{c.TITLE}}</h5>
                 </div>
                 <div class="d-flex border-top">
-                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>{{ c.CATEGORY }}</small>
-                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>{{ c.LANGUAGE }}</small>
+                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-book" aria-hidden="true"></i> {{ c.CATEGORY }}</small>
+                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-language" aria-hidden="true"></i> {{ c.LANGUAGE }}</small>
                 </div>
                 <div style="text-align:center;">
                 <p><a href="/courses/{{c.COURSE_ID}}" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>

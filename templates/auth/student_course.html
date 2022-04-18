@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Porfile{% endblock %}
+
+{% block content %}
+
+<div class="text-center wow fadeInUp" data-wow-delay="0.1s" style="margin-top: 40px;">
+    <h4 class="section-title bg-white text-center text-primary px-3">My Course</h4>
+    <!-- <h1 class="mb-5">My Course</h1> -->
+</div>
+
+<!-- course Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item text-center pt-3">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
+                        <h5 class="mb-3">{{ user.TITLE }}</h5>
+                        <p>{{ user.BRIEF }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- course Start -->
+
+
+
+
+{% endblock %}

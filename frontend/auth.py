@@ -3,7 +3,7 @@ from flask import (
     redirect, flash,
     request, session
 )
-from backend.users import get_all_students, verify_student_password, get_student_detail
+from backend.users import get_all_students, verify_student_password, get_student_detail, get_student_enroll_course, get_student_enroll_payment
 
 # Can call `flash(msg_text, alert_type)` to show a temporary message on page
 # alert_type could be 'success', 'danger', 'info', etc.
@@ -50,3 +50,21 @@ def show_student_profile(user_id):
     print('profile', u)
 
     return render_template('auth/student_profile.html', user=u)
+
+@auth_app.route('/user/<user_id>/mycourse')
+def show_student_course(user_id):
+    print('u_id', user_id)
+    u = get_student_enroll_course(user_id)
+
+    print('course', u)
+
+    return render_template('auth/student_course.html', user=u)
+
+@auth_app.route('/user/<user_id>/mypayment')
+def show_student_payment(user_id):
+    print('u_id', user_id)
+    u = get_student_enroll_payment(user_id)
+
+    print('payment', u)
+
+    return render_template('auth/student_payment.html', user=u)

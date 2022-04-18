@@ -48,3 +48,25 @@ def get_student_detail(s_id):
     # Add more detailed query about courses and 
 
     return u
+
+def get_student_enroll_course(s_id):
+    cursor = connection.cursor()
+
+    sql = f'''SELECT C.* FROM ENROLL E, COURSE C WHERE S_ID = '{s_id}' AND E.COURSE_ID = C.COURSE_ID'''
+    print('sql', sql)
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    u = dict(zip(cols, res.fetchone()))
+
+    return u
+
+def get_student_enroll_payment(s_id):
+    cursor = connection.cursor()
+
+    sql = f'''SELECT C.TITLE, P.* FROM ENROLL E, PAYMENT P, COURSE C WHERE S_ID = '{s_id}' AND E.P_ID = P.P_ID AND E.COURSE_ID = C.COURSE_ID'''
+    print('sql', sql)
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    u = dict(zip(cols, res.fetchone()))
+
+    return u

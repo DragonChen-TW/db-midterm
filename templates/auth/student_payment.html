@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Porfile{% endblock %}
+
+{% block content %}
+
+
+<div class="text-center wow fadeInUp" data-wow-delay="0.1s" style="margin-top: 40px;">
+    <h4 class="section-title bg-white text-center text-primary px-3">My Payment</h4>
+    <!-- <h1 class="mb-5">Record</h1> -->
+</div>
+<!-- payment Start -->
+<div class="col-lg-10 col-sm-6 wow fadeInUp" data-wow-delay="0.5s" style="margin-top: 40px;">
+    <table class="table table-striped" >
+        <thead>
+        <tr>
+            
+            <th scope="col">Course
+                <i class="bi bi-book"></i>
+            </th>
+            <th scope="col">Date
+                <i class="bi bi-calendar-check"></i>
+            </th>
+            <th scope="col">Amount
+                <i class="bi bi-cash"></i>
+            </th>
+            <th scope="col">CARD_ID
+                <i class="bi bi-credit-card"></i>
+            </th>
+        </tr>
+        </thead>
+            <tbody>
+                <tr>
+                    <td>{{ user.TITLE }}</td>
+                    <td>{{ user.P_DATE }}</td>
+                    <td>{{ user.AMOUNT }}</td>
+                    <td>{{ user.CARD_ID }}</td>
+                </tr>
+            </tbody>
+    </table>
+</div>
+<!-- payment Start -->
+
+
+
+
+{% endblock %}
