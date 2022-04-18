@@ -5,19 +5,23 @@ def get_all_courses():
     cursor = connection.cursor()
 
     res = cursor.execute('''
-    SELECT c.COURSE_ID, TITLE, CATEGORY, BRIEF, COURSE_FEE, "LANGUAGE", AVG_STAR, POPULATION
+    SELECT *
     FROM COURSE c LEFT OUTER JOIN (
-        SELECT COURSE_ID, AVG(star) AS avg_star, COUNT(star) AS population
-        FROM FEEDBACK f
-        GROUP BY COURSE_ID
-    ) cf
-    ON c.COURSE_ID = cf.COURSE_ID
+        SELECT c.COURSE_ID, AVG(star) AS avg_star, COUNT(star) AS population
+        FROM COURSE c LEFT OUTER JOIN FEEDBACK f
+        ON c.COURSE_ID = f.COURSE_ID
+        GROUP BY c.COURSE_ID
+    ) f
+    ON c.COURSE_ID = f.COURSE_ID
     ''')
     
     cols = parse_column_headers(res)
     courses = [dict(zip(cols, r)) for r in res]
 
     print('courses', courses)
+    for i, c in enumerate(courses):
+        if not c['AVG_STAR']:
+            courses[i]['AVG_STAR'] = 0
 
     return courses
 
