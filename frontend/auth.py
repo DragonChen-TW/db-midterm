@@ -66,7 +66,7 @@ def show_student_course():
     if not user:
         flash('請先登入', 'danger')
         return redirect('/login')
-    if not user.get('I_ID', None):
+    if not user.get('S_ID', None):
         flash('你沒有權限', 'danger')
         return redirect('/')
 
