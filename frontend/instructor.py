@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import (Blueprint, render_template, flash, redirect)
 from backend.courses import get_courses_by_instructor, get_all_courses, remove_one_course
 
 
