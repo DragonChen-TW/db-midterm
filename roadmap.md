@@ -23,7 +23,7 @@
 - [ ] Learning Record
 
 ## Classroom
-- [ ] Chapter/Content List
+- [X] Chapter/Content List
 - [ ] View Content
 <!-- - [ ] Quiz -->
 

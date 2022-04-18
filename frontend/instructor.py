@@ -100,7 +100,7 @@ def assign_new_course_id():
 #     # courses_by_instructor = get_courses_by_instructor(instructor_id)
 #     return render_template('course/edit_course.html', course=course_id)
 
-@instru_app.route('/instructor/<course_id>/view', methods=['POST'])
+@instru_app.route('/instructor/<course_id>/view', methods=['GET'])
 def view_course_stats(course_id):
     print(f'course_id: {course_id}')
     c_id = int(course_id)
@@ -111,10 +111,5 @@ def view_course_stats(course_id):
     
     # list all chaptet/contents
     contents = get_course_contents(c_id)
-
-    for content in contents:
-        print(content)
-        
-    # contents = []
     
     return render_template('/instructor/view_course_stats.html', course_desc=course_desc, contents=contents)
