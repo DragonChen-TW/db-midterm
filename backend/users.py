@@ -49,14 +49,26 @@ def login_verify(email, password):
 
     return u
 
-def get_all_students():
+def get_all_snaps():
     cursor = connection.cursor()
 
-    res = cursor.execute('''SELECT * FROM STUDENT''')
+    res = cursor.execute('''SELECT COUNT(s_id) as numberOfStudents FROM  STUDENT''')
     cols = parse_column_headers(res)
-    users = [dict(zip(cols, r)) for r in res]
+    num_student = [dict(zip(cols, r)) for r in res]
 
-    return users
+    res = cursor.execute('''SELECT COUNT(i_id) as numberOfInsturctors FROM  INSTRUCTOR''')
+    cols = parse_column_headers(res)
+    num_insturctor = [dict(zip(cols, r)) for r in res]
+
+    res = cursor.execute('''SELECT COUNT(course_id) as numberOfCourse FROM  COURSE''')
+    cols = parse_column_headers(res)
+    num_course = [dict(zip(cols, r)) for r in res]
+
+    res = cursor.execute('''select category, COUNT(category) as numberOfCategory from COURSE group by category''')
+    cols = parse_column_headers(res)
+    num_category = [dict(zip(cols, r)) for r in res]
+
+    return num_student, num_insturctor, num_course, num_category
 
 def get_student_detail(s_id):
     cursor = connection.cursor()

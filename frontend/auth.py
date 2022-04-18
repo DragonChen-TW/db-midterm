@@ -8,6 +8,7 @@ from flask import (
 )
 from backend.users import (
     login_verify, 
+    get_all_snaps,
     get_all_students, get_student_detail,
     get_student_enroll_course, get_student_enroll_payment,
     insert_user
@@ -22,18 +23,18 @@ from backend.mail import send_mail
 auth_app = Blueprint('auth_app', __name__)
 
 @auth_app.route('/')
-def show_all_students():
-    students = get_all_students()
-    print('stu', students)
-    return render_template('auth/user_list.html', students=students)
+def show_snaps():
+    num_student, num_insturctor, num_course, num_category = get_all_snaps()
+    print(num_student, num_insturctor, num_course, num_category)
+    return render_template('home/user_list.html', num_student=num_student, num_insturctor=num_insturctor, num_course=num_course, num_category=num_category)
 
 @auth_app.route('/contact')
 def show_contact():
-    return render_template('contact.html')
+    return render_template('home/contact.html')
 
 @auth_app.route('/about')
 def show_about():
-    return render_template('about.html')
+    return render_template('home/about.html')
 
 @auth_app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
