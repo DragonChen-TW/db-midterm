@@ -1,9 +1,16 @@
-from flask import (Blueprint, render_template, flash, redirect, request)
-from backend.courses import get_courses_by_instructor, get_all_courses, remove_one_course
-from backend.instructor import *
-
+from flask import Blueprint, render_template
+from backend.courses import get_courses_by_instructor
+from backend.instructor import (
+    get_instructor_detail,
+    insert_to_course, insert_to_course_instructor,
+)
 
 instru_app = Blueprint('instru_app', __name__)
+
+@instru_app.route('/instructor/<instructor_id>')
+def show_instructor_profile(instructor_id):
+    i = get_instructor_detail(instructor_id)
+    return render_template('instructor/instructor_profile.html', user=i)
 
 # Course by instructor
 @instru_app.route('/instructor_home/')

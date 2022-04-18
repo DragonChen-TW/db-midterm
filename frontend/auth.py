@@ -3,7 +3,10 @@ from flask import (
     redirect, flash,
     request, session
 )
-from backend.users import get_all_students, verify_student_password, get_student_detail
+from backend.users import (
+    login_verify, 
+    get_all_students, get_student_detail,
+)
 
 # Can call `flash(msg_text, alert_type)` to show a temporary message on page
 # alert_type could be 'success', 'danger', 'info', etc.
@@ -23,7 +26,10 @@ def login():
         email = request.form.get('email')
         pwd = request.form.get('password') # 抓取 form.html 中 input text 的值
 
-        user = verify_student_password(email, pwd)
+        user = login_verify(email, pwd)
+        # Get student entity or insturcotr entity
+        # Student: {'S_ID': 4, 'NAME': 'goodgood', 'EMAIL': 'g23523@gmail.com'}
+        # Instructor: {'I_ID': 2, 'NAME': 'dragon', 'EMAIL': 's123532@gmail.com', 'INTRODUCTION_BRIEF': '你好我是龍'}
 
         if user == None:
             flash('查無此用戶資訊，請先註冊帳號', 'danger')

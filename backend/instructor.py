@@ -1,6 +1,20 @@
 from .connect import connection
 from .utils import *
 
+def get_instructor_detail(instructor_id):
+    cursor = connection.cursor()
+    sql = f'''SELECT * FROM instructor WHERE I_ID = '{instructor_id}' '''
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    u = dict(zip(cols, res.fetchone()))
+
+    u.pop('PASSWORD', None)
+    u.pop('REGISTER_DATE', None)
+
+    # Add more detailed query about courses and 
+
+    return u
+
 def insert_to_course(course):
     cursor = connection.cursor()
     

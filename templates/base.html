@@ -83,7 +83,11 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">HI, {{ session.user.NAME }}</a>
                         <div class="dropdown-menu fade-down m-0">
+                            {% if session.user.S_ID %}
                             <a href="/user/{{session.user.S_ID}}" class="dropdown-item">My Profile</a>
+                            {% else %}
+                            <a href="/instructor/{{session.user.I_ID}}" class="dropdown-item">My Profile</a>
+                            {% endif %}
                             <a href="/logout" class="dropdown-item">Logout</a>
                         </div>
                     </div>
@@ -192,8 +196,8 @@
 
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/jquery-3.4.1.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/lib/wow/wow.min.js"></script>
     <script src="/static/lib/easing/easing.min.js"></script>
     <script src="/static/lib/waypoints/waypoints.min.js"></script>
