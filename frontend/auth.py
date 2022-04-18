@@ -1,15 +1,20 @@
+import time
+import hashlib
 from flask import (
+    current_app,
     Blueprint, render_template,
     redirect, flash,
     request, session
 )
-
 from backend.users import (
     login_verify, 
-    get_all_snaps, get_student_detail,
-    get_student_enroll_course, get_student_enroll_payment
+    get_all_snaps,
+    get_all_students, get_student_detail,
+    get_student_enroll_course, get_student_enroll_payment,
+    insert_user
 )
-
+from backend.instructor import insert_instructor
+from backend.mail import send_mail
 
 # Can call `flash(msg_text, alert_type)` to show a temporary message on page
 # alert_type could be 'success', 'danger', 'info', etc.
@@ -31,6 +36,60 @@ def show_contact():
 @auth_app.route('/about')
 def show_about():
     return render_template('home/about.html')
+
+@auth_app.route('/sign_up', methods=['GET', 'POST'])
+def sign_up():
+    if request.method == 'POST':
+        user_type = request.values.get('user_type')
+        name = request.values.get('name')
+        email = request.values.get('email')
+        pwd = request.values.get('password')
+        repeated_pwd = request.values.get('repeat_password')
+        print(email, pwd, repeated_pwd)
+
+        # test user exist
+        u = login_verify(email, '')
+        if u != None: # user exists
+            flash('此 email 已註冊', 'danger')
+        elif pwd != repeated_pwd:
+            flash('請檢查兩次密碼是否相同', 'danger')
+        else:
+            # # generate hash
+            key = f'{email} {time.time()}'
+            value = hashlib.sha256(key.encode()).hexdigest()
+
+            if user_type == 'Student':
+                insert_user(name, email, pwd)
+            elif user_type == 'Instructor':
+                insert_instructor(name, email, pwd)
+            else:
+                flash(f'註冊失敗！不允許 user_type = {user_type} ', 'danger')
+                return redirect('/sign_up')
+
+            msg_title = f'歡迎您註冊本系統'
+            msg_sender = ('DB 期中 Group 13', 'testcodepython1126@gmail.com')
+            msg_receiver = ['teacher144123@gmail.com'] # TODO: to variable
+            msg_content = f''
+
+            with current_app.app_context():
+                print('send')
+                send_mail(
+                    msg_title, msg_sender, msg_receiver, msg_content,
+                    confirm_url=f'{request.url_root}?value={value}',
+                    name=name,
+                )
+            
+            flash('註冊成功，請至信箱完成驗證', 'success')
+            return redirect('/login')
+    
+    return render_template('auth/sign_up.html')
+
+@auth_app.route('/confirm', methods=['GET'])
+def confirm_registraion():
+    value = request.values.get('value')
+
+    # TODO
+
 
 @auth_app.route('/login', methods=['GET', 'POST'])
 def login():

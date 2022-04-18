@@ -21,6 +21,30 @@ conda remove --name db-midterm --all
 
 ## How to start locally
 
+### Install Conda
+
+Install conda.
+
+- Create a new environment
+```shell
+conda env create -f environment.yml
+```
+
+- Update exist environment
+```shell
+conda env update --file environment.yml --prune
+```
+
+- Remove environment
+```shell
+conda remove --name db-midterm --all
+```
+
+- Export environment to file
+```shell
+conda env export > environment.yml
+```
+
 ### Oracle DB test
 
 I attached a zip file of instantclient binary (for macos) under `client/` folder.
