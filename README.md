@@ -8,6 +8,11 @@ Run this command to rebuild a similar environment from given yaml.
 conda env create -f environment.yml
 ```
 
+### Update exist environment
+```shell
+conda env update --file environment.yml --prune
+```
+
 ### Export environment
 ```shell
 conda env export > environment.yml
@@ -20,30 +25,6 @@ conda remove --name db-midterm --all
 ```
 
 ## How to start locally
-
-### Install Conda
-
-Install conda.
-
-- Create a new environment
-```shell
-conda env create -f environment.yml
-```
-
-- Update exist environment
-```shell
-conda env update --file environment.yml --prune
-```
-
-- Remove environment
-```shell
-conda remove --name db-midterm --all
-```
-
-- Export environment to file
-```shell
-conda env export > environment.yml
-```
 
 ### Oracle DB test
 
