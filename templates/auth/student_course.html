@@ -14,6 +14,7 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-4">
+            {% for u in user %}
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="service-item text-center pt-3">
                     <a href ="/classroom/{{ c.COURSE_ID }}">
@@ -25,6 +26,7 @@
                     </a>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>

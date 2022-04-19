@@ -24,10 +24,11 @@ auth_app = Blueprint('auth_app', __name__)
 
 @auth_app.route('/')
 def show_snaps():
-    num_student, num_insturctor, num_course, num_category, num_popular = get_all_snaps()
+    num_student, num_insturctor, num_course, num_category, num_popular, num_newest, pop_instr, comment = get_all_snaps()
     print(num_student, num_insturctor, num_course, num_category, num_popular)
     return render_template('home/homepage.html', num_student=num_student, num_insturctor=num_insturctor, 
-    num_course=num_course, num_category=num_category, num_popular=num_popular)
+    num_course=num_course, num_category=num_category, num_popular=num_popular, num_newest=num_newest, 
+    pop_instr=pop_instr, comment=comment)
 
 @auth_app.route('/contact')
 def show_contact():
