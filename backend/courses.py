@@ -147,4 +147,11 @@ def check_exist_chapter(title, course_id):
     # else: 
     #     return True
 
+def get_one_content(content_id):
+    cursor = connection.cursor()
+    # print(id)
+    res = cursor.execute(f'''SELECT * FROM CONTENT WHERE CONTENT_ID = {content_id}''')
+    cols = parse_column_headers(res)
+    content = dict(zip(cols, res.fetchone()))
 
+    return content

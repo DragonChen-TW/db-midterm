@@ -37,7 +37,7 @@
                         <th>章節主題</th>
                         <th>估計學習時間</th>
                         <th>檔案類型</th>
-                        <th>檔案路徑</th>
+                        <th>開始上課</th>
                         <th>是否強制完成</th>
                     </tr>
                     {% for content in contents %}
@@ -46,7 +46,7 @@
                         <td>{{ content.CHAPTER_TITLE }}</td>
                         <td>{{ content.REQUIRED_TIME }}</td>
                         <td>{{ content.TYPE }}</td>
-                        <td>{{ content.FILE_PATH }}</td>
+                        <td><a href="/classroom/content/{{content.CONTENT_ID}}/view" target="_blank">點我</a></td>
                         <td>{{ content. IS_MANDATORY}}</td>
                     </tr>
                     {% endfor %}
