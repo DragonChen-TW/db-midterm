@@ -2,16 +2,16 @@ from webbrowser import get
 from flask import (
     Blueprint, render_template,
     flash, redirect, request, session,
-    current_app
+    current_app, url_for
 )
 from backend.courses import (
     get_all_courses, get_one_course, get_courses_by_instructor,
-    remove_one_course, get_course_chapter, get_course_contents
+    remove_one_course, get_course_chapter, get_course_contents, get_all_contents, get_all_chapters
     )
 from backend.instructor import (
     get_all_instructor, get_instructor_detail,
     insert_to_course, insert_to_course_instructor,
-    edit_to_course,
+    edit_to_course, insert_to_chapter, insert_to_content
 )
 
 from backend.mail import send_mail
@@ -22,6 +22,7 @@ instru_app = Blueprint('instru_app', __name__)
 def show_all_instructor():
     instructors = get_all_instructor()
     return render_template('instructor/instructor_list.html', instructor=instructors)
+
 def get_instructor_id():
     user = session.get('user')
     if not user:
@@ -132,7 +133,62 @@ def edit_course(course_id):
 
     return render_template('instructor/edit_course.html', course=course)
 
+@instru_app.route('/instructor/add_content', methods=['POST'])
+def add_new_content():
 
+    print(f'[message]  receive new content value')
+    instructor_id = get_instructor_id()
+    course_id = int(request.values.get("course_id"))
+    print(f'[message]  instructor id: {instructor_id}')
+    print(f'[message]  received course id: {course_id}')
+    courses = get_courses_by_instructor(instructor_id)
+    c_ids = [c['COURSE_ID'] for c in courses]
+
+    if course_id not in c_ids:
+        flash('沒有權限新增教材至此課程', 'danger')
+        print('no permission')
+        
+    else:
+        # compute id of new content
+        print('Create new content')
+        contents = get_all_contents()
+        print('raw', contents)
+        max_id = max([int(c['CONTENT_ID']) for c in contents if c['CONTENT_ID']])
+        new_content_id = max_id + 1
+
+        chapters = get_all_chapters()
+
+        # if chapter title existed, then use the old id
+        for chapter in chapters:
+            if request.values.get('chapter_title') == chapter['CHAPTER_TITLE'] and request.values.get('course_id') == chapter['COURSE_ID']:
+                new_chapter_id = chapter['CHAPTER_ID']
+            else:
+                new_chapter_id = max([chap['CHAPTER_ID'] for chap in chapters if chap['CHAPTER_ID']]) + 1
+
+        chapter_content = {
+            "chapter_id": new_chapter_id,
+            "chapter_title": request.values.get('chapter_title'),
+            "course_id": int(request.values.get('course_id')),
+        }
+        insert_to_chapter(chapter_content)
+            
+        content_content = {
+            "content_id": new_content_id,
+            "type": request.values.get('type'),
+            "mandatory": request.values.get('mandatory'),
+            "required_time": request.values.get('required_time'),
+            "file_path": request.values.get('file_path'),
+            "chapter_id": request.values.get('chapter_id'),
+        }
+        insert_to_content(content_content)
+
+        flash(f'新增教材成功', 'success')
+        print('success')
+
+    return redirect(f'/instructor/{request.values.get("course_id")}/view')
+        
+
+    
 
 @instru_app.route('/instructor/<course_id>/view', methods=['GET'])
 def view_course_stats(course_id):

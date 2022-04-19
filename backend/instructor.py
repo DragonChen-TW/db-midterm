@@ -73,3 +73,28 @@ def insert_to_course_instructor(c_id, instructor_id):
     print('sql: ', sql)
     res = cursor.execute(sql)
     connection.commit()
+
+def insert_to_chapter(chapter):
+    cursor = connection.cursor()
+    print(f'chapter contents: {chapter}')
+
+    sql = f'''
+            INSERT INTO CHAPTER (CHAPTER_ID, CHAPTER_TITLE, COURSE_ID) 
+            VALUES ({chapter['chapter_id']}, '{chapter['chapter_title']}', {chapter['course_id']})'''
+    print('sql: ', sql)
+    res = cursor.execute(sql)
+    connection.commit()
+
+def insert_to_content(content):
+    cursor = connection.cursor()
+    print(f'content contents: {content}')
+    
+    sql = f'''
+            INSERT INTO CONTENT (CONTENT_ID, TYPE, IS_MANDATORY, REQUIRED_TIME, FILE_PATH, CHAPTER_ID) 
+            VALUES (
+                {content['content_id']}, '{content['type']}', {content['mandatory']}, 
+                {content['required_time']}, '{content['file_path']}', {content['chapter_id']})'''
+
+    print('sql: ', sql)
+    res = cursor.execute(sql)
+    connection.commit()

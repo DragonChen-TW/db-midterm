@@ -44,7 +44,6 @@ def remove_one_course(c_id):
 
 def get_courses_by_instructor(instructor_id):
     cursor = connection.cursor()
-    print(instructor_id)
     
     res = cursor.execute(f'''
         SELECT * FROM COURSE C, COURSEINSTRUCTOR CI 
@@ -54,7 +53,6 @@ def get_courses_by_instructor(instructor_id):
     ''')
     cols = parse_column_headers(res)
     courses = [dict(zip(cols, r)) for r in res]
-    print(courses)
 
     return courses
 
@@ -68,6 +66,32 @@ def get_course_chapter(c_id):
     chapters = [dict(zip(cols, r)) for r in res]
 
     return chapters
+
+def get_all_chapters():
+    cursor = connection.cursor()
+    sql = f'''
+            SELECT * FROM CHAPTER
+            '''
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    chapters = [dict(zip(cols, r)) for r in res]
+
+    chapters = sorted(chapters, key=lambda d: d['CHAPTER_ID']) 
+
+    return chapters
+
+def get_all_contents():
+    cursor = connection.cursor()
+    sql = f'''
+            SELECT * FROM CONTENT
+            '''
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    contents = [dict(zip(cols, r)) for r in res]
+
+    contents = sorted(contents, key=lambda d: d['CONTENT_ID']) 
+
+    return contents
 
 def get_course_contents(c_id):
     cursor = connection.cursor()
@@ -86,3 +110,20 @@ def get_course_contents(c_id):
     contents = sorted(contents, key=lambda d: d['CHAPTER_ID']) 
 
     return contents
+
+def get_course_chapters(course_id):
+    cursor = connection.cursor()
+
+    sql = f'''
+        SELECT * FROM CHAPTER
+        WHERE COURSE_ID = {course_id}
+    '''
+
+    print('sql: ', sql)
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    chapters = [dict(zip(cols, r)) for r in res]
+
+    chapters = sorted(chapters, key=lambda d: d['CHAPTER_ID']) 
+
+    return chapters
