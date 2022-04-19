@@ -6,6 +6,7 @@ from flask import (
 )
 from backend.courses import (
     get_one_course, get_course_contents,
+    get_one_content,
 )
 
 classroom_app = Blueprint('classroom_app', __name__)
@@ -23,5 +24,5 @@ def show_all_courses(course_id):
 
 @classroom_app.route('/classroom/content/<content_id>/view')
 def show_file_content(content_id):
-    # content_id = 
-    return send_file('static/document/0821_guided_vae.pptx')
+    content = get_one_content(content_id)
+    return send_file(content['FILE_PATH'])

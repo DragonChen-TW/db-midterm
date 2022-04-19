@@ -77,23 +77,51 @@ def get_all_snaps():
     cols = parse_column_headers(res)
     num_category = [dict(zip(cols, r)) for r in res]
 
-    res = cursor.execute('''
-        SELECT *
-        FROM COURSE c LEFT OUTER JOIN (
-            SELECT c.COURSE_ID, AVG(star) AS avg_star, COUNT(star) AS population
-            FROM COURSE c LEFT OUTER JOIN FEEDBACK f
-            ON c.COURSE_ID = f.COURSE_ID
-            GROUP BY c.COURSE_ID
-        ) f
+    res = cursor.execute('''SELECT *
+    FROM COURSE c LEFT OUTER JOIN (
+        SELECT c.COURSE_ID, AVG(star) AS avg_star, COUNT(star) AS population
+        FROM COURSE c LEFT OUTER JOIN FEEDBACK f
         ON c.COURSE_ID = f.COURSE_ID
-        WHERE population > 1
-        ORDER BY AVG_STAR DESC
-        FETCH NEXT 3 ROWS ONLY
-    ''')
+        GROUP BY c.COURSE_ID
+    ) f
+    ON c.COURSE_ID = f.COURSE_ID
+    WHERE population > 1
+    ORDER BY AVG_STAR DESC
+    FETCH NEXT 3 ROWS ONLY''')
     cols = parse_column_headers(res)
     num_popular = [dict(zip(cols, r)) for r in res]
 
-    return num_student, num_insturctor, num_course, num_category, num_popular
+    res = cursor.execute('''SELECT *
+    FROM COURSE
+    ORDER BY course_id DESC
+    FETCH NEXT 3 ROWS ONLY''')
+    cols = parse_column_headers(res)
+    num_newest = [dict(zip(cols, r)) for r in res]
+
+    res = cursor.execute('''SELECT i.NAME, students_num
+    FROM INSTRUCTOR i
+    NATURAL JOIN
+    (SELECT  I_ID, COUNT(*) as students_num
+    FROM ENROLL
+    NATURAL JOIN COURSEINSTRUCTOR
+    GROUP BY I_ID)
+    ORDER BY students_num DESC
+    FETCH NEXT 3 ROWS ONLY''')
+    cols = parse_column_headers(res)
+    pop_instr = [dict(zip(cols, r)) for r in res]
+
+    res = cursor.execute('''SELECT *
+    FROM
+    (SELECT name, title, review
+    FROM FEEDBACK
+    natural join course
+    natural join student
+    WHERE review IS NOT NULL)
+    ORDER BY DBMS_RANDOM.value FETCH NEXT 4 ROWS ONLY''')
+    cols = parse_column_headers(res)
+    comment = [dict(zip(cols, r)) for r in res]
+
+    return num_student, num_insturctor, num_course, num_category, num_popular, num_newest, pop_instr, comment
 
 def get_student_detail(s_id):
     cursor = connection.cursor()
@@ -119,6 +147,7 @@ def get_student_enroll_course(s_id):
     res = cursor.execute(sql)
     cols = parse_column_headers(res)
     u = [dict(zip(cols, r)) for r in res]
+    print(u)
 
     return u
 
@@ -129,6 +158,7 @@ def get_student_enroll_payment(s_id):
     print('sql', sql)
     res = cursor.execute(sql)
     cols = parse_column_headers(res)
-    u = dict(zip(cols, res.fetchone()))
+    u = [dict(zip(cols, r)) for r in res]
+    print(u)
 
     return u
