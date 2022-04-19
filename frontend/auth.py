@@ -26,7 +26,7 @@ auth_app = Blueprint('auth_app', __name__)
 def show_snaps():
     num_student, num_insturctor, num_course, num_category, num_popular = get_all_snaps()
     print(num_student, num_insturctor, num_course, num_category, num_popular)
-    return render_template('home/user_list.html', num_student=num_student, num_insturctor=num_insturctor, 
+    return render_template('home/homepage.html', num_student=num_student, num_insturctor=num_insturctor, 
     num_course=num_course, num_category=num_category, num_popular=num_popular)
 
 @auth_app.route('/contact')
@@ -139,8 +139,8 @@ def show_student_course():
         return redirect('/')
 
     user_id = user.get('S_ID', None)
-    u = get_student_enroll_course(user_id)
-    return render_template('auth/student_course.html', user=u)
+    courses = get_student_enroll_course(user_id)
+    return render_template('auth/student_course.html', courses=courses)
 
 @auth_app.route('/user/mypayment')
 def show_student_payment():

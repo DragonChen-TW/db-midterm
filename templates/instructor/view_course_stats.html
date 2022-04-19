@@ -8,7 +8,7 @@
 <div class="container-outside">
 
     <!-- Show instructor name in the h1 -->
-    <h1 style="text-align: center; margin-top: 50px;">課程名稱: {{ course_desc[0].TITLE }}</h1> 
+    <h1 style="text-align: center; margin-top: 50px;">課程名稱: {{ course_desc.TITLE }}</h1> 
 
     <!-- div for the table -->
     <div class="container-inside">
@@ -20,13 +20,11 @@
                     <th>課程概述</th>
                     <th>授課語言</th>
                 </tr>
-                {% for desc in course_desc %}
-                    <tr>
-                        <td>{{ desc.COURSE_FEE }}</td>
-                        <td>{{ desc.BRIEF }}</td>
-                        <td>{{ desc.LANGUAGE }}</td>
-                    </tr>
-                {% endfor %}
+                <tr>
+                    <td>{{ course_desc.COURSE_FEE }}</td>
+                    <td>{{ course_desc.BRIEF }}</td>
+                    <td>{{ course_desc.LANGUAGE }}</td>
+                </tr>
             </tbody>
         </table>
 
