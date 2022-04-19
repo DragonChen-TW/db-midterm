@@ -26,7 +26,6 @@
         {% endfor %}
     </tbody>
 </table> -->
-{% for c in course %}
 <div class="site-section">
     <div class="container">
         <div class="row">
@@ -41,11 +40,11 @@
                     </h2>
                     
                     <p><strong class="text-black d-block">Teacher:</strong> Craig Daniel</p>
-                    <p class="mb-5"><strong class="text-black d-block">Title:</strong>{{ c.TITLE }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Category:</strong>{{ c.CATEGORY }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Fee:</strong>NT$ {{ c.COURSE_FEE }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Language:</strong>{{ c.LANGUAGE }}</p>
-                    <p>{{ c.BRIEF }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Title:</strong>{{ course.TITLE }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Category:</strong>{{ course.CATEGORY }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Fee:</strong>NT$ {{ course.COURSE_FEE }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Language:</strong>{{ course.LANGUAGE }}</p>
+                    <p>{{ course.BRIEF }}</p>
 
                     <ul class="ul-check primary list-unstyled mb-5">
                         <li>{{ course.Brief }}</li>
@@ -59,5 +58,4 @@
         </div>
     </div>
 </div>
-{% endfor %}
 {% endblock %}

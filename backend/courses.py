@@ -31,9 +31,9 @@ def get_one_course(id):
     # print(id)
     res = cursor.execute(f'''SELECT * FROM COURSE WHERE COURSE_ID = {id}''')
     cols = parse_column_headers(res)
-    courses = [dict(zip(cols, r)) for r in res]
+    course = dict(zip(cols, res.fetchone()))
 
-    return courses
+    return course
 
 def remove_one_course(c_id):
     cursor = connection.cursor()

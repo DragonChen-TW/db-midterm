@@ -139,8 +139,8 @@ def show_student_course():
         return redirect('/')
 
     user_id = user.get('S_ID', None)
-    u = get_student_enroll_course(user_id)
-    return render_template('auth/student_course.html', user=u)
+    courses = get_student_enroll_course(user_id)
+    return render_template('auth/student_course.html', courses=courses)
 
 @auth_app.route('/user/mypayment')
 def show_student_payment():

@@ -10,21 +10,25 @@
 </div>
 
 <!-- course Start -->
+{% for c in courses %}
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-4">
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="service-item text-center pt-3">
+                    <a href ="/classroom/{{ c.COURSE_ID }}">
                     <div class="p-4">
                         <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
-                        <h5 class="mb-3">{{ user.TITLE }}</h5>
-                        <p>{{ user.BRIEF }}</p>
+                        <h5 class="mb-3">{{ c.TITLE }}</h5>
+                        <p>{{ c.BRIEF }}</p>
                     </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endfor %}
 <!-- course Start -->
 
 

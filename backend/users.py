@@ -118,7 +118,7 @@ def get_student_enroll_course(s_id):
     print('sql', sql)
     res = cursor.execute(sql)
     cols = parse_column_headers(res)
-    u = dict(zip(cols, res.fetchone()))
+    u = [dict(zip(cols, r)) for r in res]
 
     return u
 
