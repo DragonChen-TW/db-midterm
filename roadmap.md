@@ -3,6 +3,7 @@
 - [X] Logout
 - [X] User Profile
 - [X] Instructor Profile
+- [ ] Registration verify code
 
 ## Menu
 - [X] Course List
@@ -23,7 +24,7 @@
 <!-- - [ ] New/Update Quiz -->
 
 ## Classroom
-- [ ] Enroll
+- [ ] Enroll (Hsu) + email notification
 - [ ] Payment
 
 - [X] Chapter/Content List
