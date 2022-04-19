@@ -13,7 +13,7 @@
     <!-- div for the table -->
     <div class="container-inside">
         
-        <table style="border: 1px solid; margin: auto; margin-top: 40px; width: 100%;">
+        <table style="border: 1px solid; margin: auto; margin-top: 40px; width: 100%;" id="course-contents">
             <tbody>
                 <tr>
                     <th>課程費用</th>
@@ -54,6 +54,12 @@
             </table>
         </form>
     </div>
-
 </div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+    $('#course-contents').DataTable();
+</script>
 {% endblock %}

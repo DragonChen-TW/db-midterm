@@ -198,6 +198,11 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-center" style="margin-top: 30px;">
+        <div class="col=5" style="width: 400px;">
+        <canvas id="myChart" ></canvas>
+        </div>
+    </div>
 </div>
 <!-- Categories End -->
 
@@ -348,5 +353,47 @@
 </div>
 <!-- Testimonial End -->
 
+{% endblock %}
+
+{% block script %}
+<script>
+const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+];
+const data = {
+  labels: [
+    '語言類',
+    '資訊類',
+    '工程類',
+    '生科類',
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [3, 2, 2, 1],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(54, 255, 86)'
+    ],
+    hoverOffset: 4
+  }]
+};
+
+const config = {
+    type: 'doughnut',
+    data: data,
+    options: {}
+};
+const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+);
+</script>
 
 {% endblock %}
