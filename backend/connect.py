@@ -1,6 +1,9 @@
 import cx_Oracle
+import platform
 
-cx_Oracle.init_oracle_client(lib_dir='./client/instantclient_19_8')
+if platform.platform().startswith('darwin'):
+    cx_Oracle.init_oracle_client(lib_dir='~/instantclient_19_8')
+
 
 dsn_str = cx_Oracle.makedsn('140.117.69.58', '1521', 'ORCL')
 connection = cx_Oracle.connect(
