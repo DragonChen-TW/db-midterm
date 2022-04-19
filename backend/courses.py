@@ -1,3 +1,4 @@
+from sqlite3 import Cursor, connect
 from .connect import connection
 from .utils import *
 
@@ -38,16 +39,17 @@ def get_one_course(id):
 def remove_one_course(c_id):
     cursor = connection.cursor()
     sql = f'''DELETE FROM COURSE WHERE COURSE_ID = {c_id} '''
-    # print('sql', sql)
+    print('sql', sql)
     res = cursor.execute(sql)
     connection.commit()
+
 
 def get_courses_by_instructor(instructor_id):
     cursor = connection.cursor()
     
     res = cursor.execute(f'''
         SELECT * FROM COURSE C, COURSEINSTRUCTOR CI 
-        WHERE I_ID = '{instructor_id}' 
+        WHERE CI.I_ID = '{instructor_id}' 
         AND C.COURSE_ID = CI.COURSE_ID
         ORDER BY C.COURSE_ID
     ''')
@@ -127,3 +129,22 @@ def get_course_chapters(course_id):
     chapters = sorted(chapters, key=lambda d: d['CHAPTER_ID']) 
 
     return chapters
+
+def check_exist_chapter(title, course_id):
+    cursor = connection.cursor()
+    sql = f'''
+            SELECT CHAPTER_ID FROM CHAPTER
+            WHERE CHAPTER_TITLE = '{title}' AND COURSE_ID = '{course_id}'
+            '''    
+    print(f'sql: {sql}')
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    
+    print(cols)
+
+    # if len(chapters) < 1:
+    #     return None
+    # else: 
+    #     return True
+
+

@@ -31,71 +31,69 @@
         </table>
 
         <!-- table of course contents -->
-        <form>
-            <table style="border: 1px solid; margin: auto; margin-top: 40px; width: 100%;">
-                <tbody>
+        <table style="border: 1px solid; margin: auto; margin-top: 40px; width: 100%;">
+            <tbody>
+                <tr>
+                    <th>章節編號</th>
+                    <th>章節主題</th>
+                    <th>估計學習時間</th>
+                    <th>檔案類型</th>
+                    <th>檔案路徑</th>
+                    <th>是否強制完成</th>
+                </tr>
+                {% for content in contents %}
+                <tr>
+                    <td>{{ content.CHAPTER_ID }}</td>
+                    <td>{{ content.CHAPTER_TITLE }}</td>
+                    <td>{{ content.REQUIRED_TIME }}</td>
+                    <td>{{ content.TYPE }}</td>
+                    <td>{{ content.FILE_PATH }}</td>
+                    <td>{{ content. IS_MANDATORY}}</td>
+                    <td>
+                        <!-- delete content -->
+                        <form method="POST" action="#">
+                            <input type="submit" value="delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                <!-- add new content -->
+                <form method="POST" action="/instructor/add_content">
+                    <input type="hidden" id="course_id" name="course_id" value="{{ course_desc[0].COURSE_ID}}">
                     <tr>
-                        <th>章節編號</th>
-                        <th>章節主題</th>
-                        <th>估計學習時間</th>
-                        <th>檔案類型</th>
-                        <th>檔案路徑</th>
-                        <th>是否強制完成</th>
-                    </tr>
-                    {% for content in contents %}
-                    <tr>
-                        <td>{{ content.CHAPTER_ID }}</td>
-                        <td>{{ content.CHAPTER_TITLE }}</td>
-                        <td>{{ content.REQUIRED_TIME }}</td>
-                        <td>{{ content.TYPE }}</td>
-                        <td>{{ content.FILE_PATH }}</td>
-                        <td>{{ content. IS_MANDATORY}}</td>
+                        <td></td>
                         <td>
-                            <!-- delete content -->
-                            <form method="POST" action="#">
-                                <input type="submit" value="delete">
-                            </form>
+                            <input type="text" id="chapter_title" name="chapter_title">
+                        </td>
+                        <td>
+                            <input type="number" step="0.1" id="required_time" name="required_time">
+                        </td>
+                        <td>
+                            <select id="type" name="type">
+                                <option value="pdf">pdf</option>
+                                <option value="ppt">ppt</option>
+                                <option value="word">word</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="file_path" name="file_path">
+                        </td>
+                        <td>
+                            <select id="mandatory" name="mandatory">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
                         </td>
                     </tr>
-                    {% endfor %}
-
-                    <!-- add new content -->
-                    <form method="POST" action="/instructor/add_content">
-                        <input type="hidden" id="course_id" name="course_id" value="{{ course_desc[0].COURSE_ID}}">
-                        <tr>
-                            <td></td>
-                            <td>
-                                <input type="text" id="chapter_title" name="chapter_title">
-                            </td>
-                            <td>
-                                <input type="number" step="0.1" id="required_time" name="required_time">
-                            </td>
-                            <td>
-                                <select id="type" name="type">
-                                    <option value="pdf">pdf</option>
-                                    <option value="ppt">ppt</option>
-                                    <option value="word">word</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" id="file_path" name="file_path">
-                            </td>
-                            <td>
-                                <select id="mandatory" name="mandatory">
-                                    <option value="1">Yes</option>
-                                    <option value="0">No</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">
-                                <input type="submit" value="新增教材">
-                            </td>
-                        </tr>
-                    </form>
-                </tbody>
-            </table>
-        </form>
+                    <tr>
+                        <td colspan="6">
+                            <input type="submit" value="新增教材">
+                        </td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>
     </div>
 
 </div>
