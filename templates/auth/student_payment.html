@@ -29,14 +29,16 @@
             </th>
         </tr>
         </thead>
+        {% for u in user %}
             <tbody>
                 <tr>
-                    <td>{{ user.TITLE }}</td>
-                    <td>{{ user.P_DATE }}</td>
-                    <td>{{ user.AMOUNT }}</td>
-                    <td>{{ user.CARD_ID }}</td>
+                    <td>{{ u.TITLE }}</td>
+                    <td>{{ u.P_DATE }}</td>
+                    <td>{{ u.AMOUNT }}</td>
+                    <td>{{ u.CARD_ID }}</td>
                 </tr>
             </tbody>
+        {% endfor %}
     </table>
 </div>
 <!-- payment Start -->

@@ -29,16 +29,16 @@ INSERT INTO QUIZ VALUES(9, '選擇題', '~/tmp/ch8/quiz1.pdf', 8);
 INSERT INTO QUIZ VALUES(10, '問答題', '~/tmp/ch8/quiz2.pdf', 8);
 
 
-INSERT INTO CONTENT VALUES(1, 'pdf', '1', '5.5', '~/content/ch1/hw1.pdf', 1);
-INSERT INTO CONTENT VALUES(2, 'pdf', '1', '4.5', '~/content/ch2/hw1.pdf', 2);
-INSERT INTO CONTENT VALUES(3, 'ppt', '0', '3', '~/content/ch1/hw2.ppt', 1);
-INSERT INTO CONTENT VALUES(4, 'word', '1', '7.5', '~/content/ch5/hw1.docs', 5);
-INSERT INTO CONTENT VALUES(5, 'word', '1', '2.5', '~/content/ch1/hw3.docs', 1);
-INSERT INTO CONTENT VALUES(6, 'pdf', '0', '4.5', '~/content/ch2/hw2.pdf', 2);
-INSERT INTO CONTENT VALUES(7, 'pdf', '0', '3.1', '~/content/ch3/hw1.pdf', 3);
+INSERT INTO CONTENT VALUES(1, 'pdf', '1', '5.5', '~/static/document/Ch1-資料庫概述.pdf', 1);
+INSERT INTO CONTENT VALUES(2, 'pdf', '1', '4.5', '~/static/document/Ch2-資料關係模式-基本概念.pdf', 2);
+INSERT INTO CONTENT VALUES(3, 'ppt', '0', '3', '~/static/document/Ch1-資料庫概述.pptx', 1);
+INSERT INTO CONTENT VALUES(4, 'word', '1', '7.5', '~/static/document/Ch1-口說介紹.docx', 5);
+INSERT INTO CONTENT VALUES(5, 'word', '1', '2.5', '~/static/document/Ch1-資料庫概述.docx', 1);
+INSERT INTO CONTENT VALUES(6, 'pdf', '0', '4.5', '~/static/document/Ch2-資料關係模式-基本概念.pptx', 2);
+INSERT INTO CONTENT VALUES(7, 'pdf', '0', '3.1', '~/content/document/test.pdf', 3);
 INSERT INTO CONTENT VALUES(8, 'pdf', '1', '3.2', '~/content/ch4/hw1.pdf', 4);
-INSERT INTO CONTENT VALUES(9, 'pdf', '0', '3.3', '~/content/ch5/hw2.pdf', 5);
-INSERT INTO CONTENT VALUES(10,'pdf', '1', '3.4', '~/content/ch6/hw1.pdf', 6);
+INSERT INTO CONTENT VALUES(9, 'pdf', '0', '3.3', '~/static/document/Ch1-口說介紹.pdf', 5);
+INSERT INTO CONTENT VALUES(10,'pdf', '1', '3.4', '~/static/document/口說ch1.pdf', 6);
 INSERT INTO CONTENT VALUES(11,'pdf', '0', '3.5', '~/content/ch7/hw1.pdf', 7);
 INSERT INTO CONTENT VALUES(12,'pdf', '1', '3.6', '~/content/ch8/hw1.pdf', 8);
 INSERT INTO CONTENT VALUES(13,'pdf', '1', '3.7', '~/content/ch9/hw1.pdf', 9);

@@ -27,12 +27,19 @@
     </tbody>
 </table> -->
 {% for c in course %}
-<div class="site-section">
     <div class="container">
         <div class="row">
             <div class="col-md-6 mb-4">
                 <p>
-                    <img src="images/course_5.jpg" alt="Image" class="img-fluid">
+                    {% if c.CATEGORY == '資訊類' %}
+                    <img class="img-fluid" src="/static/img/資訊類.jpg" alt="" >
+                    {% elif c.CATEGORY == '生科類' %}
+                    <img class="img-fluid" src="/static/img/生物類.jpg" alt="" >
+                    {% elif c.CATEGORY == '語言類' %}
+                    <img class="img-fluid" src="/static/img/語言類3.jpeg" alt="" >
+                    {% elif c.CATEGORY == '工程類' %}
+                    <img class="img-fluid" src="/static/img/工程類.jpg" alt="" >
+                    {% endif %}
                 </p>
             </div>
             <div class="col-lg-5 ml-auto align-self-center">
@@ -45,10 +52,9 @@
                     <p class="mb-5"><strong class="text-black d-block">Category:</strong>{{ c.CATEGORY }}</p>
                     <p class="mb-5"><strong class="text-black d-block">Fee:</strong>NT$ {{ c.COURSE_FEE }}</p>
                     <p class="mb-5"><strong class="text-black d-block">Language:</strong>{{ c.LANGUAGE }}</p>
-                    <p>{{ c.BRIEF }}</p>
 
                     <ul class="ul-check primary list-unstyled mb-5">
-                        <li>{{ course.Brief }}</li>
+                        <li>{{ c.Brief }}</li>
                     </ul>
 
                     <p>
@@ -58,6 +64,5 @@
                 </div>
         </div>
     </div>
-</div>
 {% endfor %}
 {% endblock %}
