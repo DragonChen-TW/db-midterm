@@ -176,10 +176,11 @@ def add_new_content():
         print(f'chapters: {chapters}')
 
         ## check chapter is existed or not
-        new_chapter_id = check_exist_chapter(new_chapter_title, course_id)
-        print(f'new chapter id: {new_chapter_id}')
+        exist_chapter = check_exist_chapter(new_chapter_title, course_id)
+        print(f'exist chapter: {exist_chapter}')
+        
 
-        if  new_chapter_id == None:
+        if  exist_chapter == None:
             new_chapter_id = max([chap['CHAPTER_ID'] for chap in chapters if chap['CHAPTER_ID']]) + 1
             chapter_detail = {
                 "chapter_id": new_chapter_id,
@@ -191,6 +192,8 @@ def add_new_content():
             print('[message]  insert new row to CHAPTER table')
             insert_to_chapter(chapter_detail)
             print('[message]  insertion success!')
+        else:
+            new_chapter_id = exist_chapter[0]["CHAPTER_ID"]
         
         
         ## get new content id

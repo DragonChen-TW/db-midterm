@@ -134,18 +134,20 @@ def check_exist_chapter(title, course_id):
     cursor = connection.cursor()
     sql = f'''
             SELECT CHAPTER_ID FROM CHAPTER
-            WHERE CHAPTER_TITLE = '{title}' AND COURSE_ID = '{course_id}'
+            WHERE CHAPTER_TITLE = '{title}' AND COURSE_ID = {course_id}
             '''    
     print(f'sql: {sql}')
     res = cursor.execute(sql)
     cols = parse_column_headers(res)
-    
-    print(f'result of check exist chapter: {cols}')
+    chapters = [dict(zip(cols, r)) for r in res]
 
-    # if len(chapters) < 1:
-    #     return None
-    # else: 
-    #     return True
+    
+    print(f'result of check exist chapter: {chapters}')
+
+    if len(chapters) < 1:
+        return None
+    else: 
+        return chapters
 
 def remove_one_content(content_id):
     cursor = connection.cursor()
@@ -153,7 +155,7 @@ def remove_one_content(content_id):
     print(f'sql: {sql}')
     res = cursor.execute(sql)
     connection.commit()
-    
+
 def get_one_content(content_id):
     cursor = connection.cursor()
     # print(id)
