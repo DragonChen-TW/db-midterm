@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} {{course_id}} {% endblock %}
+{% block title %} {{course_desc.COURSE_ID}} {% endblock %}
 
 {% block content %}
 
@@ -58,7 +58,7 @@
 
                 <!-- add new content -->
                 <form method="POST" action="/instructor/add_content">
-                    <input type="hidden" id="course_id" name="course_id" value="{{ course_desc[0].COURSE_ID}}">
+                    <input type="hidden" id="course_id" name="course_id" value="{{ course_desc.COURSE_ID}}">
                     <tr>
                         <td></td>
                         <td>
