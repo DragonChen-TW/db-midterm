@@ -133,12 +133,6 @@ def edit_course(course_id):
     return render_template('instructor/edit_course.html', course=course)
 
 
-# # Instructor edit course
-# @instru_app.route('/instructor_home/editCourse')
-# def show_instructor_home(course_id):
-#     print(course_id)
-#     # courses_by_instructor = get_courses_by_instructor(instructor_id)
-#     return render_template('course/edit_course.html', course=course_id)
 
 @instru_app.route('/instructor/<course_id>/view', methods=['GET'])
 def view_course_stats(course_id):
