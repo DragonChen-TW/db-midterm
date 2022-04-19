@@ -69,14 +69,14 @@ def sign_up():
 
             msg_title = f'歡迎您註冊本系統'
             msg_sender = ('DB 期中 Group 13', 'testcodepython1126@gmail.com')
-            msg_receiver = ['teacher144123@gmail.com'] # TODO: to variable
+            msg_receiver = [email] # TODO: to variable
             msg_content = f''
 
             with current_app.app_context():
                 print('send')
                 send_mail(
                     msg_title, msg_sender, msg_receiver, msg_content,
-                    confirm_url=f'{request.url_root}?value={value}',
+                    confirm_url=f'{request.url_root}/confirm?value={value}',
                     name=name,
                 )
             
@@ -89,7 +89,8 @@ def sign_up():
 def confirm_registraion():
     value = request.values.get('value')
 
-    # TODO
+    flash('驗證成功！歡迎註冊本系統', 'success')
+    return redirect('/login')
 
 
 @auth_app.route('/login', methods=['GET', 'POST'])
