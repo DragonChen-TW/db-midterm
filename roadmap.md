@@ -12,27 +12,28 @@
 
 ## Create Course
 - [X] Course List/Delete
+  - [ ] Show student feedback 
 - [X] Chapter List/Delete
 - [X] Content List/Delete
+  - [ ] calculate ratio of completeness
 <!-- - [ ] Quiz List/Delete -->
 - [X] New/Update Course
-- [ ] New/Update Chapter
-- [ ] New/Update Content
+- [X] New Chapter
+- [X] New/ Content
 <!-- - [ ] New/Update Quiz -->
-
-- [ ] Chapter/Content Table
 
 ## Classroom
 - [ ] Enroll
 - [ ] Payment
 
 - [X] Chapter/Content List
-- [ ] PDF links, View
-- [ ] View Content
+- [X] PDF links, View
 - [ ] Learning Record
+- [ ] mark as complete
+- [ ] student feedback
 
 - [ ] Search Content datatable.js
-- [ ] Search Course
+- [ ] Search Course, Instructor (keyword/dropdown)
 
 ## Advanced
 - [ ] Show statistics
@@ -41,11 +42,11 @@
 
 ## Improvement
 
-- [ ] 英文改中文
+- [X] 英文改中文
 - [ ] 所有頁面的 Title、name
 
-- [ ] Footer 資訊與連結
-- [ ] About
+- [X] Footer 資訊與連結
+- [X] About
 
 - [ ] Icon
 - [ ] QRCode
