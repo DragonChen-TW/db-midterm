@@ -147,6 +147,13 @@ def check_exist_chapter(title, course_id):
     # else: 
     #     return True
 
+def remove_one_content(content_id):
+    cursor = connection.cursor()
+    sql = f'''DELETE CONTENT WHERE CONTENT_ID = {content_id}'''
+    print(f'sql: {sql}')
+    res = cursor.execute(sql)
+    connection.commit()
+    
 def get_one_content(content_id):
     cursor = connection.cursor()
     # print(id)
