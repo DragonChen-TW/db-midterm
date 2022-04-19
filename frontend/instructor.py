@@ -1,3 +1,5 @@
+from crypt import methods
+from operator import methodcaller
 from webbrowser import get
 from flask import (
     Blueprint, render_template,
@@ -6,7 +8,9 @@ from flask import (
 )
 from backend.courses import (
     get_all_courses, get_one_course, get_courses_by_instructor,
-    remove_one_course, get_course_chapter, get_course_contents, get_all_contents, get_all_chapters, check_exist_chapter
+    remove_one_course, get_course_chapter, get_course_contents, 
+    get_all_contents, get_all_chapters, check_exist_chapter,
+    remove_one_content
     )
 from backend.instructor import (
     get_all_instructor, get_instructor_detail,
@@ -187,22 +191,7 @@ def add_new_content():
             print('[message]  insert new row to CHAPTER table')
             insert_to_chapter(chapter_detail)
             print('[message]  insertion success!')
-        # # flag to decide whether insert to chapter table
-        # for chapter in chapters:
-        #     ## if chapter existed, do nothing
-        #     print(f"new title: {new_chapter_title}; exist title: {chapter['CHAPTER_TITLE']}")
-        #     print(f"new course id: {course_id}; exist course id: {chapter['COURSE_ID']}")
-
-        #     if  [new_chapter_title , course_id] not in [chapters['CHAPTER_TITLE'], int(chapters['COURSE_ID'])]:
-        #         print('[message]  chapter already existed.')
-        #         new_chapter_id = chapter['CHAPTER_ID']
-        #         break
-        #     else:
-        #         print('[message]  create new chapter')
-        #         new_chapter_id = max([chap['CHAPTER_ID'] for chap in chapters if chap['CHAPTER_ID']]) + 1
-        #         print(f'new chapter id: {new_chapter_id}')
-                
-        #         break
+        
         
         ## get new content id
         print('[message]  create new content')
@@ -225,6 +214,34 @@ def add_new_content():
 
     return redirect(f'/instructor/{course_id}/view')
         
+@instru_app.route('/instructor/delete_content', methods=['POST'])
+def delete_content():
+    print('[message]  start delete content')
+
+    course_id = request.values.get('course_id')
+    content_id = request.values.get('content_id')
+    print(f'[message]  delete content {content_id} from {course_id}')
+
+    # instructor_id = get_instructor_id()
+    # instructor_id = session.user.get('i_id', None)
+
+    # courses = get_courses_by_instructor(instructor_id)
+    # c_ids = [c['COURSE_ID'] for c in courses]
+    # print(f'courses of the instructor: {c_ids}')
+
+    remove_one_content(content_id)
+    print('[message]  success')
+
+    # if course_id not in c_ids:
+    #     print('no permission')
+    #     flash('沒有權限刪除此課程', 'danger')
+    # else:
+    #     print(f'[message] start to delete course')
+    #     remove_one_course(course_id)
+    #     flash(f'刪除課程 {course_id} 成功', 'success')
+    #     print('success')
+
+    return redirect(f'/instructor/{course_id}/view')
 
     
 

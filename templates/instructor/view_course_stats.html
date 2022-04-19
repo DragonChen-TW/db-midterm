@@ -46,10 +46,12 @@
                     <td>{{ content.REQUIRED_TIME }}</td>
                     <td>{{ content.TYPE }}</td>
                     <td>{{ content.FILE_PATH }}</td>
-                    <td>{{ content. IS_MANDATORY}}</td>
+                    <td>{{ content.IS_MANDATORY}}</td>
                     <td>
                         <!-- delete content -->
-                        <form method="POST" action="#">
+                        <form method="POST" action="/instructor/delete_content">
+                            <input type="hidden" id="course_id" name="course_id" value="{{ course_desc.COURSE_ID }}">
+                            <input type="hidden" id="content_id" name="content_id" value="{{ content.CONTENT_ID }}">
                             <input type="submit" value="delete">
                         </form>
                     </td>

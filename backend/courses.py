@@ -140,11 +140,16 @@ def check_exist_chapter(title, course_id):
     res = cursor.execute(sql)
     cols = parse_column_headers(res)
     
-    print(cols)
+    print(f'result of check exist chapter: {cols}')
 
     # if len(chapters) < 1:
     #     return None
     # else: 
     #     return True
 
-
+def remove_one_content(content_id):
+    cursor = connection.cursor()
+    sql = f'''DELETE CONTENT WHERE CONTENT_ID = {content_id}'''
+    print(f'sql: {sql}')
+    res = cursor.execute(sql)
+    connection.commit()
