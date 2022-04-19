@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %} {{course_id}} {% endblock %}
+
+{% block content %}
+
+<!-- div for main contents -->
+<div class="container-outside">
+
+    <!-- Show instructor name in the h1 -->
+    <h1 style="text-align: center; margin-top: 50px;">課程名稱: {{ course_desc.TITLE }}</h1> 
+
+    <!-- div for the table -->
+    <div class="container-inside">
+        
+        <table style="border: 1px solid; margin: auto; margin-top: 40px; width: 100%;">
+            <tbody>
+                <tr>
+                    <th>課程費用</th>
+                    <th>課程概述</th>
+                    <th>授課語言</th>
+                </tr>
+                <tr>
+                    <td>{{ course_desc.COURSE_FEE }}</td>
+                    <td>{{ course_desc.BRIEF }}</td>
+                    <td>{{ course_desc.LANGUAGE }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- table of course contents -->
+        <form>
+            <table style="border: 1px solid; margin: auto; margin-top: 40px; width: 100%;">
+                <tbody>
+                    <tr>
+                        <th>章節編號</th>
+                        <th>章節主題</th>
+                        <th>估計學習時間</th>
+                        <th>檔案類型</th>
+                        <th>檔案路徑</th>
+                        <th>是否強制完成</th>
+                    </tr>
+                    {% for content in contents %}
+                    <tr>
+                        <td>{{ content.CHAPTER_ID }}</td>
+                        <td>{{ content.CHAPTER_TITLE }}</td>
+                        <td>{{ content.REQUIRED_TIME }}</td>
+                        <td>{{ content.TYPE }}</td>
+                        <td>{{ content.FILE_PATH }}</td>
+                        <td>{{ content. IS_MANDATORY}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

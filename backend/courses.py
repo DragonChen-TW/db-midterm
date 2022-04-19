@@ -1,3 +1,4 @@
+from sqlite3 import Cursor, connect
 from .connect import connection
 from .utils import *
 
@@ -31,30 +32,29 @@ def get_one_course(id):
     # print(id)
     res = cursor.execute(f'''SELECT * FROM COURSE WHERE COURSE_ID = {id}''')
     cols = parse_column_headers(res)
-    courses = [dict(zip(cols, r)) for r in res]
+    course = dict(zip(cols, res.fetchone()))
 
-    return courses
+    return course
 
 def remove_one_course(c_id):
     cursor = connection.cursor()
     sql = f'''DELETE FROM COURSE WHERE COURSE_ID = {c_id} '''
-    # print('sql', sql)
+    print('sql', sql)
     res = cursor.execute(sql)
     connection.commit()
 
+
 def get_courses_by_instructor(instructor_id):
     cursor = connection.cursor()
-    print(instructor_id)
     
     res = cursor.execute(f'''
         SELECT * FROM COURSE C, COURSEINSTRUCTOR CI 
-        WHERE I_ID = '{instructor_id}' 
+        WHERE CI.I_ID = '{instructor_id}' 
         AND C.COURSE_ID = CI.COURSE_ID
         ORDER BY C.COURSE_ID
     ''')
     cols = parse_column_headers(res)
     courses = [dict(zip(cols, r)) for r in res]
-    print(courses)
 
     return courses
 
@@ -68,6 +68,32 @@ def get_course_chapter(c_id):
     chapters = [dict(zip(cols, r)) for r in res]
 
     return chapters
+
+def get_all_chapters():
+    cursor = connection.cursor()
+    sql = f'''
+            SELECT * FROM CHAPTER
+            '''
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    chapters = [dict(zip(cols, r)) for r in res]
+
+    chapters = sorted(chapters, key=lambda d: d['CHAPTER_ID']) 
+
+    return chapters
+
+def get_all_contents():
+    cursor = connection.cursor()
+    sql = f'''
+            SELECT * FROM CONTENT
+            '''
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    contents = [dict(zip(cols, r)) for r in res]
+
+    contents = sorted(contents, key=lambda d: d['CONTENT_ID']) 
+
+    return contents
 
 def get_course_contents(c_id):
     cursor = connection.cursor()
@@ -86,3 +112,39 @@ def get_course_contents(c_id):
     contents = sorted(contents, key=lambda d: d['CHAPTER_ID']) 
 
     return contents
+
+def get_course_chapters(course_id):
+    cursor = connection.cursor()
+
+    sql = f'''
+        SELECT * FROM CHAPTER
+        WHERE COURSE_ID = {course_id}
+    '''
+
+    print('sql: ', sql)
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    chapters = [dict(zip(cols, r)) for r in res]
+
+    chapters = sorted(chapters, key=lambda d: d['CHAPTER_ID']) 
+
+    return chapters
+
+def check_exist_chapter(title, course_id):
+    cursor = connection.cursor()
+    sql = f'''
+            SELECT CHAPTER_ID FROM CHAPTER
+            WHERE CHAPTER_TITLE = '{title}' AND COURSE_ID = '{course_id}'
+            '''    
+    print(f'sql: {sql}')
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    
+    print(cols)
+
+    # if len(chapters) < 1:
+    #     return None
+    # else: 
+    #     return True
+
+

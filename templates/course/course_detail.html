@@ -26,20 +26,12 @@
         {% endfor %}
     </tbody>
 </table> -->
-{% for c in course %}
+<div class="site-section">
     <div class="container">
         <div class="row">
             <div class="col-md-6 mb-4">
                 <p>
-                    {% if c.CATEGORY == '資訊類' %}
-                    <img class="img-fluid" src="/static/img/資訊類.jpg" alt="" >
-                    {% elif c.CATEGORY == '生科類' %}
-                    <img class="img-fluid" src="/static/img/生物類.jpg" alt="" >
-                    {% elif c.CATEGORY == '語言類' %}
-                    <img class="img-fluid" src="/static/img/語言類3.jpeg" alt="" >
-                    {% elif c.CATEGORY == '工程類' %}
-                    <img class="img-fluid" src="/static/img/工程類.jpg" alt="" >
-                    {% endif %}
+                    <img class="img-fluid" src="/static/img/category/{{ course.CATEGORY }}.jpg" alt="">
                 </p>
             </div>
             <div class="col-lg-5 ml-auto align-self-center">
@@ -48,21 +40,22 @@
                     </h2>
                     
                     <p><strong class="text-black d-block">Teacher:</strong> Craig Daniel</p>
-                    <p class="mb-5"><strong class="text-black d-block">Title:</strong>{{ c.TITLE }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Category:</strong>{{ c.CATEGORY }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Fee:</strong>NT$ {{ c.COURSE_FEE }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Language:</strong>{{ c.LANGUAGE }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Title:</strong>{{ course.TITLE }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Category:</strong>{{ course.CATEGORY }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Fee:</strong>NT$ {{ course.COURSE_FEE }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Language:</strong>{{ course.LANGUAGE }}</p>
+                    <p>{{ course.BRIEF }}</p>
 
                     <ul class="ul-check primary list-unstyled mb-5">
-                        <li>{{ c.Brief }}</li>
+                        <li>{{ course.Brief }}</li>
                     </ul>
 
                     <p>
-                        <a href="#" class="btn btn-primary rounded-0 btn-lg px-5">Enroll</a>
+                        <a href="#" class="btn btn-primary rounded-0 btn-lg px-5">註冊</a>
                     </p>
 
                 </div>
         </div>
     </div>
-{% endfor %}
+</div>
 {% endblock %}
