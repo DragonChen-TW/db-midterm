@@ -1,8 +1,9 @@
 from flask import session
 from .connect import connection
 from .utils import *
+from random import sample
 
-def get_all_feedbacks(course_id):
+def get_max5_feedbacks(course_id):
     cursor = connection.cursor()
     sql = f'''
         SELECT * FROM FEEDBACK NATURAL JOIN STUDENT
@@ -11,6 +12,10 @@ def get_all_feedbacks(course_id):
     res = cursor.execute(sql)
     cols = parse_column_headers(res)
     feedbacks = [dict(zip(cols, r)) for r in res]
+
+    if len(feedbacks) >= 5:
+        feedbacks = sample(feedbacks, 5)
+
     return feedbacks
 
 def get_my_feedback(course_id):

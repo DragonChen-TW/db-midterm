@@ -9,7 +9,7 @@ from backend.courses import (
     remove_one_course, get_all_courses_search
 )
 from backend.feedback import (
-    get_all_feedbacks,
+    get_max5_feedbacks,
     get_my_feedback,
 )
 
@@ -56,7 +56,7 @@ def show_one_course(course_id):
     course = get_one_course(course_id)
     my_feedback = get_my_feedback(course_id)
     print('my_fb', my_feedback)
-    feedbacks = get_all_feedbacks(course_id)
+    feedbacks = get_max5_feedbacks(course_id)
     print('fffeedbacks', feedbacks)
     return render_template('course/course_detail.html',
         course=course,
