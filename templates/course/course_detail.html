@@ -2,30 +2,70 @@
 
 {% block title %}Course{% endblock %}
 
+{% block header %}
+<style>
+    .star-container {
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        /* object-fit: cover; */
+        display: inline-flex;
+    }
+    .star-img {
+        flex: 1;
+        position: relative;
+        height: 20px;
+        object-fit: cover;
+    }
+</style>
+<script>
+    const ratio = 20;
+    const createStar = (w) => {
+        const starContainer = document.createElement('div');
+        starContainer.className = 'star-container';
+        if (w != 0) {
+            const fullStar = document.createElement('img')
+            fullStar.className = 'star-img';
+            fullStar.src = '/static/img/star.svg';
+            fullStar.style.width = `${w}px`;
+            fullStar.style.objectPosition = `-${ratio}px 0`;
+            starContainer.appendChild(fullStar);
+        }
+        const emptyStar = document.createElement('img')
+        emptyStar.className = 'star-img';
+        emptyStar.src = '/static/img/star.svg';
+        emptyStar.style.width = `-${w}px`;
+        emptyStar.style.objectPosition = `-${w}px 0`;
+        starContainer.appendChild(emptyStar);
+        return starContainer;
+    };
+    const genStars = (id, score) => {
+        score = parseFloat(score);
+        console.log(id, score);
+        const container = document.getElementById(id);
+
+        let stars = document.createElement('div');
+        stars.className = 'stars';
+        // stars.innerHTML = score;
+        for (let i = 0; i < 5; i++) {
+            let star;
+            if (score >= 1) {
+                star = createStar(ratio);
+            } else if (score >= 0 && score < 1) {
+                star = createStar(score * ratio);
+            } else {
+                star = createStar(0);
+            }
+            score -= 1;
+            stars.appendChild(star);
+        }
+        container.appendChild(stars);
+    };
+</script>
+{% endblock %}
+
 {% block content %}
 <h1>course</h1>
-<!-- <table>
-    <tbody>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Brief</th>
-            <th>Price</th>
-            <th>Language</th>
-        </tr>
-        {% for c in course %}
-            <tr>
-                <td>{{ c.COURSE_ID }}</td>
-                <td>{{ c.TITLE }}</td>
-                <td>{{ c.CATEGORY }}</td>
-                <td>{{ c.BRIEF }}</td>
-                <td>{NT${ c.COURSE_FEE }}</td>
-                <td>{{ c.LANGUAGE }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table> -->
 <div class="site-section">
     <div class="container">
         <div class="row">
@@ -39,8 +79,8 @@
                         <span>Course Details</span>
                     </h2>
                     <p class="mb-3"><strong class="text-black d-block">Teacher:
-                    {% for i in instr_name %}
-                    </strong>{{ i.NAME }}&emsp;
+                    {% for i in course.INSTR_NAME %}
+                        </strong>{{ i.NAME }}&emsp;
                     {% endfor %}
                     </p>
                     <p class="mb-3"><strong class="text-black d-block"><i class="fa fa-check" aria-hidden="true"></i> Title:</strong>
@@ -63,6 +103,20 @@
                     </p>
 
                 </div>
+        </div>
+
+        {% for fb in feedbacks %}
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <div>{{ fb.NAME }}</div>
+                <div id="star-container-{{fb.S_ID}}"></div>
+                {{ fb.REVIEW }}
+            </div>
+        </div>
+        <script>
+            genStars("star-container-{{fb.S_ID}}", '{{fb.STAR}}');
+        </script>
+        {% endfor %}
         </div>
     </div>
 </div>

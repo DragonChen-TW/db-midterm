@@ -8,6 +8,10 @@ from backend.courses import (
     get_all_courses, get_one_course, get_courses_by_instructor,
     remove_one_course, get_all_courses_search
 )
+from backend.feedback import (
+    get_all_feedbacks,
+    get_my_feedback,
+)
 
 course_app = Blueprint('course_app', __name__)
 
@@ -49,8 +53,15 @@ def show_all_courses():
 
 @course_app.route('/courses/<course_id>', methods=['GET'])
 def show_one_course(course_id):
-    course, instr_name = get_one_course(course_id)
-    return render_template('course/course_detail.html', course=course, instr_name=instr_name)
+    course = get_one_course(course_id)
+    my_feedback = get_my_feedback(course_id)
+    print('my_fb', my_feedback)
+    feedbacks = get_all_feedbacks(course_id)
+    print('fffeedbacks', feedbacks)
+    return render_template('course/course_detail.html',
+        course=course,
+        my_feedback=my_feedback, feedbacks=feedbacks
+    )
 
 # @course_app.route('/courses/<course_id>', methods=['POST'])
 # def edit_one_course(course_id):

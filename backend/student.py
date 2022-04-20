@@ -39,47 +39,30 @@ def insert_to_enroll(enrollment):
 			return False
 
 
-def check_studentcontent_exist(s_id, c_id):
-    cursor = connection.cursor()
+def insert_to_studentcontent(student_content):
+	cursor = connection.cursor()
+	now = datetime.now()
+	regist_time = now.strftime('%d-%m-%Y %H:%M:%S')
+	print(f'register time: {regist_time}')
 
-    sql = f'''
+	sql_get = f'''
         SELECT * FROM STUDENTCONTENT
-        WHERE S_ID = {s_id} AND CONTENT_ID = {c_id}
+        WHERE S_ID = {student_content['content_id']} AND CONTENT_ID = {student_content['s_id']}
     '''
-    res = cursor.execute(sql).fetchone()
-    return res != None
+	res_get = cursor.execute(sql_get)
+	cols = parse_column_headers(res_get)
 
-def create_studentcontent(s_id, c_id):
-    cursor = connection.cursor()
-
-    sql = f'''
-        INSERT INTO STUDENTCONTENT
-        VALUES({s_id}, {c_id}, NULL, NULL, NULL)
-    '''
-    print('sql', sql)
-    res = cursor.execute(sql)
-    connection.commit()
-
-def complete_or_cancel_content(c_id, complete=True):
-    s_id = session.get('user').get('S_ID') # student ID
-    cursor = connection.cursor()
-
-    if not check_studentcontent_exist(s_id, c_id):  # if there is no record
-        create_studentcontent(s_id, c_id)
-    print('exist', check_studentcontent_exist(s_id, c_id))
-
-    if complete: # set as complete
-        sql = f'''
-            UPDATE STUDENTCONTENT sc
-            SET STATUS = 'finish', COMPLETE = TO_DATE('{datetime.now().replace(microsecond=0)}', 'YYYY-MM-DD HH24:MI:SS')
-            WHERE sc.S_ID = {s_id} AND CONTENT_ID = {c_id}
-        '''
-    else:        # set as unfinished
-        sql = f'''
-            UPDATE STUDENTCONTENT sc
-            SET STATUS = NULL, COMPLETE = NULL 
-            WHERE sc.S_ID = {s_id} AND CONTENT_ID = {c_id}
-        '''
-    print('sql', sql)
-    res = cursor.execute(sql)
-    connection.commit()
+	# if no record, then insert new one
+	if res_get.fetchone() == None:
+		sql = f'''      
+		INSERT INTO STUDENTCONTENT
+		VALUES ({student_content['s_id']}, {student_content['content_id']}, 
+				TO_TIMESTAMP('{regist_time}', 'DD-MM-YYYY HH24:MI:SS'), NULL, 'not yet')
+		'''
+		res = cursor.execute(sql)
+		connection.commit()
+		print("Insert into ENROLL success!")
+		return True
+	else: 
+		print("Already existed!")
+		return False

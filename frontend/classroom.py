@@ -9,7 +9,7 @@ from backend.courses import (
     get_one_content,
 )
 from backend.student import (
-    complete_or_cancel_content
+    insert_to_studentcontent,
 )
 
 classroom_app = Blueprint('classroom_app', __name__)
@@ -27,8 +27,14 @@ def show_all_courses(course_id):
 
 @classroom_app.route('/classroom/content/<content_id>/view')
 def show_file_content(content_id):
+    student = session.get('user')
     content = get_one_content(content_id)
 
-    complete_or_cancel_content(content['CONTENT_ID'], complete=True)
+    student_content = {
+        's_id': student['S_ID'],
+        'content_id': content_id,
+        'status': 'not yet'
+    }
+    insert_to_studentcontent(student_content)
 
     return send_file(content['FILE_PATH'])

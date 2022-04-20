@@ -78,8 +78,9 @@ def get_one_course(id):
     WHERE c.COURSE_ID = {id} AND c.course_id = ci.course_id AND i.i_id = ci.i_id''')
     cols = parse_column_headers(res)
     instr_name = [dict(zip(cols, r)) for r in res]
-    print(instr_name)
-    return course, instr_name
+    course['INSTR_NAME'] = instr_name
+
+    return course
 
 def remove_one_course(c_id):
     cursor = connection.cursor()
