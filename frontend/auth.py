@@ -1,4 +1,5 @@
 from datetime import date, datetime
+from imp import is_builtin
 from os import system
 import time
 import hashlib
@@ -178,26 +179,32 @@ def enroll_course(course_id):
         "s_id": user['S_ID'],
         "e_date": e_date
     }
-    try:
-        insert_to_enroll(enrollment)
+    
+    is_success = insert_to_enroll(enrollment)
+
+    if is_success:
+
         flash("註冊課程成功", "success")
 
         course_info = get_one_course(course_id)
+        print(f'course info: {course_info}')
 
         msg_title = f"歡迎註冊 {course_info['TITLE']}"
+        print(f'email title: {msg_title}')
         msg_sender = ('DB 期中 Group 13', 'testcodepython1126@gmail.com')
-        msg_receiver = user['EMAIL'] # TODO: to variable
+        msg_receiver = [user['EMAIL']] # TODO: to variable
         msg_content = f"歡迎註冊 {course_info['TITLE']}, 期待您能從這門課收穫到滿滿的知識!"
 
         with current_app.app_context():
-                print('send')
-                send_mail(
-                    msg_title, msg_sender, msg_receiver, msg_content,
-                    name=user['NAME'],
-                )
-
+            print('send')
+            send_mail(
+                msg_title, msg_sender, msg_receiver, msg_content,
+                name=user['NAME'],
+            )
         return redirect(f'/classroom/{course_id}')
-    except:
-        flash("註冊課程失敗!", 'danger')
+
+    else:
+        flash("註冊課程失敗", "danger")
         return redirect(f'/courses/{course_id}')
+
     
