@@ -1,6 +1,5 @@
-from multiprocessing import Condition
-from ntpath import join
-from sqlite3 import Cursor, connect
+from flask import session
+import datetime
 from .connect import connection
 from .utils import *
 
@@ -149,13 +148,38 @@ def get_course_contents(c_id):
         WHERE COURSE_ID = {c_id}
     '''
 
-    # sql = f'''SELECT CHAPTER_ID, CHAPTER_TITLE, FILE_PATH, REQUIRED_TIME, COUNT(S_ID) "S_AMOUNT", COUNT(S_ID WHEN STATUS='finish' THEN 1 END) "S_FINISH" FROM (CONTENT NATURAL JOIN CHAPTER) NATURAL JOIN STUDENTCONTENT WHERE COURSE_ID = {c_id} GROUP BY CONTENT_ID'''
     print('sql: ', sql)
     res = cursor.execute(sql)
     cols = parse_column_headers(res)
     contents = [dict(zip(cols, r)) for r in res]
 
     contents = sorted(contents, key=lambda d: d['CHAPTER_ID']) 
+
+    return contents
+
+def get_student_course_contents(c_id):
+    s_id = session.get('user').get('S_ID') # student ID
+
+    cursor = connection.cursor()
+
+    sql = f'''
+        SELECT * FROM 
+            (CHAPTER ch JOIN CONTENT co ON ch.CHAPTER_ID = co.CHAPTER_ID)
+            LEFT OUTER JOIN (
+                SELECT S_ID, CONTENT_ID AS SC_C_ID, COMPLETE, STATUS
+                FROM STUDENTCONTENT sc WHERE sc.S_ID = {s_id}
+            ) sc
+            ON co.CONTENT_ID = sc.SC_C_ID
+        WHERE COURSE_ID = {c_id}
+        ORDER BY ch.CHAPTER_ID, co.CONTENT_ID
+    '''
+
+    print('sql: ', sql)
+    res = cursor.execute(sql)
+    cols = parse_column_headers(res)
+    contents = [dict(zip(cols, r)) for r in res]
+    
+    print('contents', contents)
 
     return contents
 
