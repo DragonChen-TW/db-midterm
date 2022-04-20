@@ -10,6 +10,7 @@ from backend.courses import (
 )
 from backend.student import (
     insert_to_studentcontent,
+    update_to_studentcontent,
 )
 
 classroom_app = Blueprint('classroom_app', __name__)
@@ -38,3 +39,25 @@ def show_file_content(content_id):
     insert_to_studentcontent(student_content)
 
     return send_file(content['FILE_PATH'])
+
+
+@classroom_app.route('/classroom/content/<content_id>/complete')
+def complete_content(content_id):
+    student = session.get('user')
+    # content = get_one_content(content_id)
+
+    student_content = {
+        's_id': student['S_ID'],
+        'content_id': content_id,
+    }
+    ok = update_to_studentcontent(student_content)
+
+    course_id = request.values.get('COURSE_ID')
+    if ok and course_id:
+        return redirect(f'/classroom/{course_id}')
+    elif not ok:
+        flash('完成課程失敗', 'danger')
+        return redirect('/user/mycourse')
+    else:
+        flash('找無原始課程路徑', 'danger')
+        return redirect('/user/mycourse')

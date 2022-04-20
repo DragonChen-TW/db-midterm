@@ -41,6 +41,7 @@
                         <th>是否強制完成</th>
                         <th>是否完成</th>
                         <th>完成日期</th>
+                        <th>完成</th>
                     </tr>
                     {% for content in contents %}
                     <tr>
@@ -53,10 +54,24 @@
                                 href="/classroom/content/{{content.CONTENT_ID}}/view"
                                 target="_blank"
                                 onclick="setTimeout(()=>document.location.reload(), 1000)"
-                            >點我</a></td>
+                            >
+                                點我
+                            </a>
+                        </td>
                         <td>{{ content.IS_MANDATORY }}</td>
                         <td>{{ content.STATUS }}</td>
                         <td>{{ content.COMPLETE }}</td>
+                        <td>
+                            {% if content.STATUS == 'not yet' %}
+                            <a href="/classroom/content/{{content.CONTENT_ID}}/complete?COURSE_ID={{course_desc.COURSE_ID}}">
+                                點我
+                            </a>
+                            {% elif content.STATUS == None %}
+                                未瀏覽
+                            {% else %}
+                                已完成
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
