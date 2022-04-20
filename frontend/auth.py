@@ -183,7 +183,6 @@ def enroll_course(course_id):
     is_success = insert_to_enroll(enrollment)
 
     if is_success:
-
         flash("註冊課程成功", "success")
 
         course_info = get_one_course(course_id)
@@ -204,7 +203,7 @@ def enroll_course(course_id):
         return redirect(f'/classroom/{course_id}')
 
     else:
-        flash("註冊課程失敗", "danger")
+        flash("你已經註冊過該課程", "info")
         return redirect(f'/courses/{course_id}')
 
     

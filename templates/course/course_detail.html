@@ -101,9 +101,11 @@
                         <li>{{ course.Brief }}</li>
                     </ul> -->
 
+                    {% if session.user and not session.user.I_ID %}
                     <p>
                         <a href="/user/enroll/{{ course.COURSE_ID }}" class="btn btn-primary rounded-0 btn-lg px-5">註冊</a>
                     </p>
+                    {% endif %}
 
                 </div>
         </div>
