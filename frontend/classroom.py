@@ -7,7 +7,9 @@ from flask import (
 from backend.courses import (
     get_one_course, get_course_contents, get_student_course_contents,
     get_one_content,
-    complete_or_cancel_content,
+)
+from backend.student import (
+    complete_or_cancel_content
 )
 
 classroom_app = Blueprint('classroom_app', __name__)

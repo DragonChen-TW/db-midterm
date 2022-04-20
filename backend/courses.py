@@ -177,52 +177,6 @@ def get_student_course_contents(c_id):
 
     return contents
 
-def check_studentcontent_exist(s_id, c_id):
-    cursor = connection.cursor()
-
-    sql = f'''
-        SELECT * FROM STUDENTCONTENT
-        WHERE S_ID = {s_id} AND CONTENT_ID = {c_id}
-    '''
-    res = cursor.execute(sql).fetchone()
-    return res != None
-
-def create_studentcontent(s_id, c_id):
-    cursor = connection.cursor()
-
-    sql = f'''
-        INSERT INTO STUDENTCONTENT
-        VALUES({s_id}, {c_id}, NULL, NULL, NULL)
-    '''
-    print('sql', sql)
-    res = cursor.execute(sql)
-    connection.commit()
-
-def complete_or_cancel_content(c_id, complete=True):
-    s_id = session.get('user').get('S_ID') # student ID
-    cursor = connection.cursor()
-
-    if not check_studentcontent_exist(s_id, c_id):  # if there is no record
-        create_studentcontent(s_id, c_id)
-    print('exist', check_studentcontent_exist(s_id, c_id))
-
-    if complete: # set as complete
-        sql = f'''
-            UPDATE STUDENTCONTENT sc
-            SET STATUS = 'finish', COMPLETE = TO_DATE('{datetime.datetime.now().replace(microsecond=0)}', 'YYYY-MM-DD HH24:MI:SS')
-            WHERE sc.S_ID = {s_id} AND CONTENT_ID = {c_id}
-        '''
-    else:        # set as unfinished
-        sql = f'''
-            UPDATE STUDENTCONTENT sc
-            SET STATUS = NULL, COMPLETE = NULL 
-            WHERE sc.S_ID = {s_id} AND CONTENT_ID = {c_id}
-        '''
-    print('sql', sql)
-    res = cursor.execute(sql)
-    connection.commit()
-    connection.commit()
-
 def get_course_chapters(course_id):
     cursor = connection.cursor()
 

@@ -48,7 +48,12 @@
                         <td>{{ content.CHAPTER_TITLE }}</td>
                         <td>{{ content.REQUIRED_TIME }}</td>
                         <td>{{ content.TYPE }}</td>
-                        <td><a href="/classroom/content/{{content.CONTENT_ID}}/view" target="_blank" onclick="document.location.reload()">點我</a></td>
+                        <td>
+                            <a
+                                href="/classroom/content/{{content.CONTENT_ID}}/view"
+                                target="_blank"
+                                onclick="setTimeout(()=>document.location.reload(), 1000)"
+                            >點我</a></td>
                         <td>{{ content.IS_MANDATORY }}</td>
                         <td>{{ content.STATUS }}</td>
                         <td>{{ content.COMPLETE }}</td>
