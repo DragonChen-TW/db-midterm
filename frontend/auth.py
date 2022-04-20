@@ -1,3 +1,5 @@
+from datetime import date, datetime
+from os import system
 import time
 import hashlib
 from flask import (
@@ -15,6 +17,7 @@ from backend.users import (
 )
 from backend.instructor import insert_instructor
 from backend.mail import send_mail
+from backend.student import insert_to_enroll
 
 # Can call `flash(msg_text, alert_type)` to show a temporary message on page
 # alert_type could be 'success', 'danger', 'info', etc.
@@ -154,3 +157,31 @@ def show_student_payment():
     user_id = user.get('S_ID', None)
     u = get_student_enroll_payment(user_id)
     return render_template('auth/student_payment.html', user=u)
+
+@auth_app.route('/user/enroll/<course_id>', methods=['GET'])
+def enroll_course(course_id):
+    user = session.get('user')
+    if not user:
+        flash('請先登入', 'danger')
+        return redirect('/login')
+
+    today = date.today()
+    e_date = today.strftime("%Y-%m-%d")
+
+    print(f'course id: {course_id}') # course id: 7
+    print(f'user: {user}') # user: {'EMAIL': 'g23523@gmail.com', 'NAME': 'goodgood', 'S_ID': 4}
+    print(f'e_date: {e_date}') # e_date: 2022-04-20
+
+    enrollment = {
+        "course_id": course_id,
+        "s_id": user['S_ID'],
+        "e_date": e_date
+    }
+    try:
+        insert_to_enroll(enrollment)
+        flash("註冊成功", "success")
+        return redirect(f'/classroom/{course_id}')
+    except:
+        flash("註冊失敗!", 'danger')
+        return redirect(f'/courses/{course_id}')
+    
