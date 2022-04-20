@@ -66,6 +66,8 @@
                             <a href="/classroom/content/{{content.CONTENT_ID}}/complete?COURSE_ID={{course_desc.COURSE_ID}}">
                                 點我
                             </a>
+                            {% elif content.STATUS == None %}
+                                未瀏覽
                             {% else %}
                                 已完成
                             {% endif %}
