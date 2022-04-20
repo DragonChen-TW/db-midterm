@@ -38,20 +38,20 @@
                     <h2 class="section-title-underline mb-5">
                         <span>Course Details</span>
                     </h2>
-                    <p class="mb-5"><strong class="text-black d-block">Teacher:
+                    <p class="mb-3"><strong class="text-black d-block">Teacher:
                     {% for i in instr_name %}
                     </strong>{{ i.NAME }}&emsp;
                     {% endfor %}
                     </p>
-                    <p class="mb-5"><strong class="text-black d-block">Title:</strong><i class="fa fa-check" aria-hidden="true"></i>
+                    <p class="mb-3"><strong class="text-black d-block"><i class="fa fa-check" aria-hidden="true"></i> Title:</strong>
                         {{ course.TITLE }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Category:</strong><i class="fa fa-check" aria-hidden="true"></i>
+                    <p class="mb-3"><strong class="text-black d-block"><i class="fa fa-check" aria-hidden="true"></i> Category:</strong>
                         {{ course.CATEGORY }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Fee:</strong><i class="fa fa-check" aria-hidden="true"></i>
+                    <p class="mb-3"><strong class="text-black d-block"><i class="fa fa-check" aria-hidden="true"></i> Fee:</strong>
                         NT$ {{ course.COURSE_FEE }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Language:</strong><i class="fa fa-check" aria-hidden="true"></i>
+                    <p class="mb-3"><strong class="text-black d-block"><i class="fa fa-check" aria-hidden="true"></i> Language:</strong>
                         {{ course.LANGUAGE }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Brief:</strong><i class="fa fa-comments" aria-hidden="true"></i>
+                    <p class="mb-3"><strong class="text-black d-block"><i class="fa fa-comments" aria-hidden="true"></i> Brief:</strong>
                         {{ course.BRIEF }}</p>
 
                     <!-- <ul class="ul-check primary list-unstyled mb-5">
