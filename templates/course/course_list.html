@@ -69,6 +69,30 @@
     <h4 class="section-title bg-white text-center text-primary px-3">Course List</h4>
     <!-- <h1 class="mb-5">Record</h1> -->
 </div>
+
+<div class="container-outside">
+
+    <!-- div for the table -->
+    <div class="container-inside">
+        <form method="POST">
+                <tr>
+                    <td>課程名稱</td>
+                    <td><input type="text" id="course_title" name="course_title"></td>
+                    <td>類型</td>
+                    <td><input type="text" id="course_title" name="course_cate"></td>
+                    <td>語言</td>
+                    <td><input type="text" id="course_title" name="course_lang"></td>
+                    <button type="submit">
+                        <a href="/courses">
+                            搜尋
+                        </a>
+                    </button>
+                </tr>
+        </form>
+    </div>
+    
+</div>
+
     <div class="row g-4 justify-content-center" style="margin-top: 40px;">
     {% for c in courses %}
         

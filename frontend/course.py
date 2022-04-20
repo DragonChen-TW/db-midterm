@@ -6,15 +6,37 @@ from flask import (
 )
 from backend.courses import (
     get_all_courses, get_one_course, get_courses_by_instructor,
-    remove_one_course,
+    remove_one_course, get_all_courses_search
 )
 
 course_app = Blueprint('course_app', __name__)
 
-@course_app.route('/courses')
+@course_app.route('/courses', methods=['GET', 'POST'])
 def show_all_courses():
-    courses = get_all_courses()
+
+    if request.method == 'POST':
+        course_content = {
+            "c_title": request.values.get('course_title'),
+            "c_cate": request.values.get('course_cate'),
+            "c_lang": request.values.get('course_lang')
+        }
+        courses = get_all_courses_search(course_content)
+    else:
+        courses = get_all_courses()
+
     return render_template('course/course_list.html', courses=courses)
+
+# @course_app.route('/courses/search', methods=['GET', 'POST'])
+# def show_all_courses_search():
+
+#     if request.method == 'POST':
+#         print(f'[message]  insert new course.')
+#         course_content = {
+#             "c_title": request.values.get('course_title')
+#         }
+#         courses = get_all_courses_search(course_content)
+
+#     return render_template('course/course_list.html', courses=courses)
 
 @course_app.route('/courses/<course_id>', methods=['GET'])
 def show_one_course(course_id):

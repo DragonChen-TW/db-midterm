@@ -1,3 +1,5 @@
+from multiprocessing import Condition
+from ntpath import join
 from sqlite3 import Cursor, connect
 from .connect import connection
 from .utils import *
@@ -16,6 +18,43 @@ def get_all_courses():
     ON c.COURSE_ID = f.COURSE_ID
     ORDER BY c.COURSE_ID
     ''')
+    
+    cols = parse_column_headers(res)
+    courses = [dict(zip(cols, r)) for r in res]
+
+    print('courses', courses)
+    for i, c in enumerate(courses):
+        if not c['AVG_STAR']:
+            courses[i]['AVG_STAR'] = 0
+
+    return courses
+
+def get_all_courses_search(course_tmp):
+    cursor = connection.cursor()
+    print(course_tmp)
+    
+    conditions = []
+    if course_tmp['c_title']:
+        conditions.append(f"TITLE like '%{course_tmp['c_title']}%'")
+    if course_tmp['c_cate']:
+        conditions.append(f"CATEGORY like '%{course_tmp['c_cate']}%'")
+    if course_tmp['c_lang']:
+        conditions.append(f"LANGUAGE like '%{course_tmp['c_lang']}%'")
+    conditions = " AND ".join(conditions)
+
+    sql = f'''
+    SELECT *
+    FROM COURSE c LEFT OUTER JOIN (
+        SELECT c.COURSE_ID, AVG(star) AS avg_star, COUNT(star) AS population
+        FROM COURSE c LEFT OUTER JOIN FEEDBACK f
+        ON c.COURSE_ID = f.COURSE_ID
+        GROUP BY c.COURSE_ID
+    ) f
+    ON c.COURSE_ID = f.COURSE_ID
+    WHERE {conditions}
+    ORDER BY c.COURSE_ID
+    '''
+    res = cursor.execute(sql)
     
     cols = parse_column_headers(res)
     courses = [dict(zip(cols, r)) for r in res]
