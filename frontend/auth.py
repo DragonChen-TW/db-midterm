@@ -18,6 +18,7 @@ from backend.users import (
 from backend.instructor import insert_instructor
 from backend.mail import send_mail
 from backend.student import insert_to_enroll
+from backend.courses import get_one_course
 
 # Can call `flash(msg_text, alert_type)` to show a temporary message on page
 # alert_type could be 'success', 'danger', 'info', etc.
@@ -179,9 +180,24 @@ def enroll_course(course_id):
     }
     try:
         insert_to_enroll(enrollment)
-        flash("註冊成功", "success")
+        flash("註冊課程成功", "success")
+
+        course_info = get_one_course(course_id)
+
+        msg_title = f"歡迎註冊 {course_info['TITLE']}"
+        msg_sender = ('DB 期中 Group 13', 'testcodepython1126@gmail.com')
+        msg_receiver = user['EMAIL'] # TODO: to variable
+        msg_content = f"歡迎註冊 {course_info['TITLE']}, 期待您能從這門課收穫到滿滿的知識!"
+
+        with current_app.app_context():
+                print('send')
+                send_mail(
+                    msg_title, msg_sender, msg_receiver, msg_content,
+                    name=user['NAME'],
+                )
+
         return redirect(f'/classroom/{course_id}')
     except:
-        flash("註冊失敗!", 'danger')
+        flash("註冊課程失敗!", 'danger')
         return redirect(f'/courses/{course_id}')
     
