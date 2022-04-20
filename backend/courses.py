@@ -34,13 +34,14 @@ def get_all_courses_search(course_tmp):
     print(course_tmp)
     
     conditions = []
-    if course_tmp['c_title']:
+    if course_tmp.get('c_title'):
         conditions.append(f"TITLE like '%{course_tmp['c_title']}%'")
-    if course_tmp['c_cate']:
+    if course_tmp.get('c_cate'):
         conditions.append(f"CATEGORY like '%{course_tmp['c_cate']}%'")
-    if course_tmp['c_lang']:
+    if course_tmp.get('c_lang'):
         conditions.append(f"LANGUAGE like '%{course_tmp['c_lang']}%'")
     conditions = " AND ".join(conditions)
+    conditions = f'WHERE {conditions}'
 
     sql = f'''
     SELECT *
@@ -51,7 +52,7 @@ def get_all_courses_search(course_tmp):
         GROUP BY c.COURSE_ID
     ) f
     ON c.COURSE_ID = f.COURSE_ID
-    WHERE {conditions}
+    {conditions}
     ORDER BY c.COURSE_ID
     '''
     res = cursor.execute(sql)

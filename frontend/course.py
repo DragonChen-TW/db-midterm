@@ -15,12 +15,21 @@ course_app = Blueprint('course_app', __name__)
 def show_all_courses():
 
     if request.method == 'POST':
-        course_content = {
-            "c_title": request.values.get('course_title'),
-            "c_cate": request.values.get('course_cate'),
-            "c_lang": request.values.get('course_lang')
-        }
-        courses = get_all_courses_search(course_content)
+        course_content = {}
+        
+        if request.values.get('course_title'):
+            course_content["c_title"] = request.values.get('course_title')
+        if request.values.get('course_cate'):
+            course_content["c_cate"] = request.values.get('course_cate')
+        if request.values.get('course_lang'):
+            course_content["c_lang"] = request.values.get('course_lang')
+        
+        print('coutse_content', course_content)
+        
+        if len(course_content) == 0:
+            courses = get_all_courses()
+        else:
+            courses = get_all_courses_search(course_content)
     else:
         courses = get_all_courses()
 
