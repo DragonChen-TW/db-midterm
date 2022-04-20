@@ -9,19 +9,32 @@ def insert_to_enroll(enrollment):
 				WHERE S_ID = {enrollment['s_id']}'''
 	res_get = cursor.execute(sql_get)
 	cols = parse_column_headers(res_get)
-	exist_courses = dict(zip(cols, res_get.fetchone()))
+	print(f"fetch one: {res_get.fetchone()}")
 
-	if enrollment['course_id'] not in exist_courses:
+	# if no record 
+	if res_get.fetchone() == None:
 		sql = f'''      
-	    INSERT INTO ENROLL
-	    VALUES ({enrollment['course_id']}, {enrollment['s_id']}, NULL, to_date('{enrollment['e_date']}', 'YYYY-MM-DD'))
-	    '''
+		INSERT INTO ENROLL
+		VALUES ({enrollment['course_id']}, {enrollment['s_id']}, NULL, to_date('{enrollment['e_date']}', 'YYYY-MM-DD'))
+		'''
 		res = cursor.execute(sql)
 		connection.commit()
 		print("Insert into ENROLL success!")
 		return True
-	else:
-		print("Insertion failed")
-		return False
+	else: 
+		exist_courses = dict(zip(cols, res_get.fetchone()))
+
+		if enrollment['course_id'] not in exist_courses:
+			sql = f'''      
+	    	INSERT INTO ENROLL
+	    	VALUES ({enrollment['course_id']}, {enrollment['s_id']}, NULL, to_date('{enrollment['e_date']}', 'YYYY-MM-DD'))
+	    	'''
+			res = cursor.execute(sql)
+			connection.commit()
+			print("Insert into ENROLL success!")
+			return True
+		else:
+			print("Insertion failed")
+			return False
 
 	
