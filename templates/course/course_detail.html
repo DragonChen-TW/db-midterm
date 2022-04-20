@@ -105,7 +105,7 @@
                 </div>
         </div>
 
-        {% for fb in feedbacks %}
+        <!-- {% for fb in feedbacks %}
         <div class="row justify-content-center">
             <div class="col-7">
                 <div>{{ fb.NAME }}</div>
@@ -117,7 +117,35 @@
             genStars("star-container-{{fb.S_ID}}", '{{fb.STAR}}');
         </script>
         {% endfor %}
+        </div> -->
+
+        <!-- Testimonial Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s" style="margin-top: 50px;">
+            <div class="container">
+                <div class="text-center">
+                    <h1 class="mb-5">學生評論</h1>
+                </div>
+                <div class="owl-carousel testimonial-carousel position-relative">
+                    {% for fb in feedbacks %}
+                    <div class="testimonial-item text-center">
+                        <img class="border rounded-circle p-2 mx-auto mb-3" src="/static/img/user.png" style="width: 80px; height: 80px;">
+                        <h5 class="mb-0"> {{ fb.NAME }} </h5>
+                        <div id="star-container-{{fb.S_ID}}"></div>
+                        <script>
+                            genStars("star-container-{{fb.S_ID}}", '{{fb.STAR}}');
+                        </script>
+                        <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0"> {{ fb.REVIEW }} </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
+        <!-- Testimonial End -->
+
+
+
     </div>
 </div>
 {% endblock %}
