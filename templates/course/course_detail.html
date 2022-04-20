@@ -44,7 +44,10 @@
         console.log(id, score);
         const container = document.getElementById(id);
 
-        let stars = document.createElement('div');
+        let stars = document.querySelector(`#${id} .stars`);
+        if (stars) return;
+        
+        stars = document.createElement('div');
         stars.className = 'stars';
         // stars.innerHTML = score;
         for (let i = 0; i < 5; i++) {
@@ -135,7 +138,7 @@
                             genStars("star-container-{{fb.S_ID}}", '{{fb.STAR}}');
                         </script>
                         <div class="testimonial-text bg-light text-center p-4">
-                        <p class="mb-0"> {{ fb.REVIEW }} </p>
+                            <p class="mb-0"> {{ fb.REVIEW }} </p>
                         </div>
                     </div>
                     {% endfor %}
