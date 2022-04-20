@@ -15,7 +15,7 @@ conda env update --file environment.yml --prune
 
 ### Export environment
 ```shell
-conda env export > environment.yml
+conda env export --no-builds > environment.yml
 ```
 
 ### Remove exist environment
