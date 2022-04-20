@@ -49,8 +49,8 @@ def show_all_courses():
 
 @course_app.route('/courses/<course_id>', methods=['GET'])
 def show_one_course(course_id):
-    course = get_one_course(course_id)
-    return render_template('course/course_detail.html', course=course)
+    course, instr_name = get_one_course(course_id)
+    return render_template('course/course_detail.html', course=course, instr_name=instr_name)
 
 # @course_app.route('/courses/<course_id>', methods=['POST'])
 # def edit_one_course(course_id):

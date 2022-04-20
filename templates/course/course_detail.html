@@ -38,17 +38,25 @@
                     <h2 class="section-title-underline mb-5">
                         <span>Course Details</span>
                     </h2>
-                    
-                    <p><strong class="text-black d-block">Teacher:</strong> Craig Daniel</p>
-                    <p class="mb-5"><strong class="text-black d-block">Title:</strong>{{ course.TITLE }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Category:</strong>{{ course.CATEGORY }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Fee:</strong>NT$ {{ course.COURSE_FEE }}</p>
-                    <p class="mb-5"><strong class="text-black d-block">Language:</strong>{{ course.LANGUAGE }}</p>
-                    <p>{{ course.BRIEF }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Teacher:
+                    {% for i in instr_name %}
+                    </strong>{{ i.NAME }}&emsp;
+                    {% endfor %}
+                    </p>
+                    <p class="mb-5"><strong class="text-black d-block">Title:</strong><i class="fa fa-check" aria-hidden="true"></i>
+                        {{ course.TITLE }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Category:</strong><i class="fa fa-check" aria-hidden="true"></i>
+                        {{ course.CATEGORY }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Fee:</strong><i class="fa fa-check" aria-hidden="true"></i>
+                        NT$ {{ course.COURSE_FEE }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Language:</strong><i class="fa fa-check" aria-hidden="true"></i>
+                        {{ course.LANGUAGE }}</p>
+                    <p class="mb-5"><strong class="text-black d-block">Brief:</strong><i class="fa fa-comments" aria-hidden="true"></i>
+                        {{ course.BRIEF }}</p>
 
-                    <ul class="ul-check primary list-unstyled mb-5">
+                    <!-- <ul class="ul-check primary list-unstyled mb-5">
                         <li>{{ course.Brief }}</li>
-                    </ul>
+                    </ul> -->
 
                     <p>
                         <a href="/user/enroll/{{ course.COURSE_ID }}" class="btn btn-primary rounded-0 btn-lg px-5">註冊</a>

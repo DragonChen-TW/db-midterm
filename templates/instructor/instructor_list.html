@@ -10,6 +10,27 @@
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s" >
             <h4 class="section-title bg-white text-center text-primary px-3">Instructors</h4>
         </div>
+
+        <div class="container-outside">
+
+            <!-- div for the table -->
+            <div class="container-inside">
+                <form method="POST">
+                    <div class="col-lg-8 col-sm-6 wow fadeInUp" data-wow-delay="0.5s" style="text-align:center;margin-top: 40px;">
+                        <tr>
+                            <td>教師名字 : </td>
+                            <td><input type="text" id="course_title" name="instr_name"></td>
+                            <input type="submit" value="搜尋">
+                            </input>
+                        </tr>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+
+
+
         <div class="row g-4" style="margin-top: 40px;">
             {% for i in instructor %}
             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">

@@ -13,6 +13,29 @@ def get_all_instructor():
 
     return instructor
 
+def get_all_instructor_search(insr_tmp):
+    cursor = connection.cursor()
+    print(insr_tmp)
+    
+    conditions = []
+    if insr_tmp.get('i_name'):
+        conditions.append(f"NAME like '%{insr_tmp['i_name']}%'")
+    conditions = " AND ".join(conditions)
+    conditions = f'WHERE {conditions}'
+
+    sql = f'''
+    SELECT * FROM INSTRUCTOR
+    {conditions}
+    '''
+    res = cursor.execute(sql)
+    
+    cols = parse_column_headers(res)
+    instructors = [dict(zip(cols, r)) for r in res]
+
+    print('instructors', instructors)
+
+    return instructors
+
 def get_instructor_detail(instructor_id):
     cursor = connection.cursor()
     sql = f'''SELECT * FROM instructor WHERE I_ID = '{instructor_id}' '''

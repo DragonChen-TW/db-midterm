@@ -15,16 +15,31 @@ from backend.courses import (
 from backend.instructor import (
     get_all_instructor, get_instructor_detail,
     insert_to_course, insert_to_course_instructor,
-    edit_to_course, insert_to_chapter, insert_to_content
+    edit_to_course, insert_to_chapter, insert_to_content, get_all_instructor_search
 )
 
 from backend.mail import send_mail
 
 instru_app = Blueprint('instru_app', __name__)
 
-@instru_app.route('/instructors')
+@instru_app.route('/instructors', methods=['GET', 'POST'])
 def show_all_instructor():
-    instructors = get_all_instructor()
+    
+    if request.method == 'POST':
+        instructor_content = {}
+        
+        if request.values.get('instr_name'):
+            instructor_content["i_name"] = request.values.get('instr_name')
+        
+        print('coutse_content', instructor_content)
+        
+        if len(instructor_content) == 0:
+            instructors = get_all_instructor()
+        else:
+            instructors = get_all_instructor_search(instructor_content)
+    else:
+        instructors = get_all_instructor()
+
     return render_template('instructor/instructor_list.html', instructor=instructors)
 
 def get_instructor_id():
