@@ -1,5 +1,6 @@
 from .connect import connection
 from .utils import *
+from datetime import datetime
 
 def insert_to_enroll(enrollment):
 	cursor = connection.cursor()
@@ -9,7 +10,6 @@ def insert_to_enroll(enrollment):
 				WHERE S_ID = {enrollment['s_id']}'''
 	res_get = cursor.execute(sql_get)
 	cols = parse_column_headers(res_get)
-	print(f"fetch one: {res_get.fetchone()}")
 
 	# if no record 
 	if res_get.fetchone() == None:
@@ -37,4 +37,29 @@ def insert_to_enroll(enrollment):
 			print("Insertion failed")
 			return False
 
-	
+def insert_to_studentcontent(student_content):
+	cursor = connection.cursor()
+	now = datetime.now()
+	regist_time = now.strftime('%d-%m-%Y %H:%M:%S')
+	print(f'register time: {regist_time}')
+
+	sql_get = f'''
+				SELECT * FROM STUDENTCONTENT
+				WHERE S_ID = {student_content['content_id']} AND CONTENT_ID = {student_content['s_id']}'''
+	res_get = cursor.execute(sql_get)
+	cols = parse_column_headers(res_get)
+
+	# if no record, then insert new one
+	if res_get.fetchone() == None:
+		sql = f'''      
+		INSERT INTO STUDENTCONTENT
+		VALUES ({student_content['s_id']}, {student_content['content_id']}, 
+				TO_TIMESTAMP('{regist_time}', 'DD-MM-YYYY HH24:MI:SS'), NULL, 'not yet')
+		'''
+		res = cursor.execute(sql)
+		connection.commit()
+		print("Insert into ENROLL success!")
+		return True
+	else: 
+		print("Already existed!")
+		return False

@@ -8,9 +8,9 @@ from backend.courses import (
     get_one_course, get_course_contents,
     get_one_content,
 )
-# from backend.student import (
-#     insert_to_studentcontent
-# )
+from backend.student import (
+    insert_to_studentcontent
+)
 
 classroom_app = Blueprint('classroom_app', __name__)
 
@@ -36,5 +36,5 @@ def show_file_content(content_id):
         'status': 'not yet'
     }
     
-    # insert_to_studentcontent(student_content)
+    insert_to_studentcontent(student_content)
     return send_file(content['FILE_PATH'])
